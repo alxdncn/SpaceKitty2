@@ -11,10 +11,12 @@ public class WebCamShader : MonoBehaviour {
 	//Shader stuff
 	Material renderMat;
 	[SerializeField] [Range(0,1)] float saturationThreshold;
-	[SerializeField] Color renderLightColor;
+	public Color renderLightColor;
 
-	//Reading shader texture
+	Texture2D renderedTex = null;
 	[SerializeField] int texReadIncrement = 4;
+
+	Rect texRect;
 
 	// Use this for initialization
 	void Awake () {
@@ -42,11 +44,19 @@ public class WebCamShader : MonoBehaviour {
 
 			Graphics.Blit (source, destination, renderMat);
 
-			Texture renderedTex = renderMat.mainTexture;
+			if (renderedTex == null) {
+				texRect = new Rect (0, 0, source.width, source.height);
+				renderedTex = new Texture2D (source.width, source.height);
+			}
 
-			for (int i = 0; i < renderedTex.width; i += texReadIncrement) {
-				for (int j = 0; j < renderedTex.height; j += texReadIncrement) {
+			renderedTex.ReadPixels(texRect, 0, 0);
 
+			for (int i = texReadIncrement; i < renderedTex.width - texReadIncrement; i += texReadIncrement) {
+				for (int j = texReadIncrement; j < renderedTex.height - texReadIncrement; j += texReadIncrement) {
+					Color col = renderedTex.GetPixel (i, j);
+					if(Mathf.Abs(col.r - renderLightColor.r) < 0.01f && Mathf.Abs(col.g - renderLightColor.g) < 0.01f && Mathf.Abs(col.b - renderLightColor.b) < 0.01f){
+//						Debug.Log ("X: " + i + "  Y: " + j);
+					}
 				}
 			}
 		}
