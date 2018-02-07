@@ -49,11 +49,11 @@
 				newUV.x = 1 - newUV.x;
 				fixed4 webCamCol = tex2D(_WebCamTex, newUV);
 
-				float saturation = (webCamCol.r + webCamCol.g + webCamCol.b) / 3;
+				float saturation = min((webCamCol.r + webCamCol.g + webCamCol.b) / 3, 1);
 
+				//pink is 1, blue is 0
 				float webCamAdjuster = clamp(ceil(saturation - _SaturationThreshold), 0, 1);
 
-				// just invert the colors
 				col = col * (1 - webCamAdjuster) + _RenderColor * (webCamAdjuster);
 				return col;
 			}

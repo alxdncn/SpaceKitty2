@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class WebCamShader : MonoBehaviour {
 
+	static WebCamShader instance;
+	public static WebCamShader Instance{
+		get{
+			if (instance == null) {
+				instance = FindObjectOfType<WebCamShader>();
+			}
+			return instance;
+		}
+		private set { instance = value; }
+	}
+
 	WebCamTexture webCamTex;
 
 	bool initialized = false;
@@ -36,6 +47,17 @@ public class WebCamShader : MonoBehaviour {
 			renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 			renderMat.SetColor ("_RenderColor", renderLightColor);
 		}
+	}
+
+	public void IncreaseBrightness(float bChangeAmount){
+		saturationThreshold = Mathf.Min(saturationThreshold - bChangeAmount, 1);
+		renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
+	}
+
+	public void DecreaseBrightness(float bChangeAmount){
+		saturationThreshold = Mathf.Max(saturationThreshold + bChangeAmount, 0);
+		
+		renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 	}
 
 	// Postprocess the image
