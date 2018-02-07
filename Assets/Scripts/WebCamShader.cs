@@ -11,14 +11,14 @@ public class WebCamShader : MonoBehaviour {
 	//Shader stuff
 	Material renderMat;
 	[SerializeField] [Range(0,1)] float saturationThreshold;
-	public Color renderLightColor;
+	[SerializeField] Color renderLightColor;
 
 	Texture2D renderedTex = null;
 	public int texReadIncrement = 4;
 
 	Rect texRect;
 
-	public List<Vector2> brightPixelPositions = new List<Vector2> ();
+	[HideInInspector] public List<Vector2> brightPixelPositions = new List<Vector2> ();
 
 	// Use this for initialization
 	void Awake () {
@@ -57,8 +57,8 @@ public class WebCamShader : MonoBehaviour {
 
 			Vector2 newPos = new Vector2 ();
 
-			for (int i = texReadIncrement; i < renderedTex.width - texReadIncrement; i += texReadIncrement) {
-				for (int j = texReadIncrement; j < renderedTex.height - texReadIncrement; j += texReadIncrement) {
+			for (int i = texReadIncrement/2; i < renderedTex.width; i += texReadIncrement) {
+				for (int j = -texReadIncrement/2; j < renderedTex.height; j += texReadIncrement) {
 					Color col = renderedTex.GetPixel (i, j);
 					if(Mathf.Abs(col.r - renderLightColor.r) < 0.01f && Mathf.Abs(col.g - renderLightColor.g) < 0.01f && Mathf.Abs(col.b - renderLightColor.b) < 0.01f){
 						newPos.x = i;
@@ -67,8 +67,6 @@ public class WebCamShader : MonoBehaviour {
 					}
 				}
 			}
-
-//			Debug.Log (brightPixelPositions.Count);
 		}
 	}
 }
