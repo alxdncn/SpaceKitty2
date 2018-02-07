@@ -9,7 +9,7 @@ public class ReadLightPixels : MonoBehaviour {
 	[SerializeField] GameObject colliderPrefab;
 	List<GameObject> colliderPool = new List<GameObject>();
 
-	float waitTimer = 3f;
+	[SerializeField] float waitTimer = 3f;
 
 	float camSize;
 	float camX;
@@ -23,7 +23,8 @@ public class ReadLightPixels : MonoBehaviour {
 		camPos = Camera.main.transform.position;
 		camSize = Camera.main.orthographicSize;
 
-		float colliderSize = (webCamScript.texReadIncrement/camY) * camSize;
+		//I hate that 1.28 is a magic number I found by guessing and checking. What's the actual logic here?
+		float colliderSize = (webCamScript.texReadIncrement/(camY * 1.28f)) * camSize;
 
 		colliderPrefab.transform.localScale = new Vector3(colliderSize, colliderSize, colliderSize);
 	}
@@ -53,6 +54,8 @@ public class ReadLightPixels : MonoBehaviour {
 				colliderPool.Add (obj);
 			} else {
 				obj = colliderPool [i];
+				if (!obj.activeSelf)
+					obj.SetActive (true);
 			}
 
 			pos2D = convertToWorldPoint (webCamScript.brightPixelPositions [i]);
