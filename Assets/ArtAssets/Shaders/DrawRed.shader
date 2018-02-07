@@ -51,7 +51,7 @@
 
 				float saturation = (webCamCol.r + webCamCol.g + webCamCol.b) / 3;
 
-				float webCamAdjuster = ceil(saturation - _SaturationThreshold);
+				float webCamAdjuster = clamp(ceil(saturation - _SaturationThreshold), 0, 1);
 
 				// just invert the colors
 				col = col * (1 - webCamAdjuster) + _RenderColor * (webCamAdjuster);
