@@ -55,7 +55,6 @@ public class WebCamShader : MonoBehaviour {
 				for (int j = texReadIncrement; j < renderedTex.height - texReadIncrement; j += texReadIncrement) {
 					Color col = renderedTex.GetPixel (i, j);
 					if(Mathf.Abs(col.r - renderLightColor.r) < 0.01f && Mathf.Abs(col.g - renderLightColor.g) < 0.01f && Mathf.Abs(col.b - renderLightColor.b) < 0.01f){
-//						Debug.Log ("X: " + i + "  Y: " + j);
 					}
 				}
 			}
