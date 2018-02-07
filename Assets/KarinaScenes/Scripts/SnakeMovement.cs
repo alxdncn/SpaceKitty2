@@ -65,7 +65,7 @@ public class SnakeMovement : MonoBehaviour {
 			}
 
 	}
-
+		
 	void MoveSumSnake(Vector3 dir){
 		SnakeTest.myButt.transform.position = SnakeTest.middles [SnakeTest.middles.Count - 1].transform.position;
 		Vector3 newDir = SnakeTest.middles [SnakeTest.middles.Count - 1].transform.rotation.eulerAngles;
@@ -85,6 +85,7 @@ public class SnakeMovement : MonoBehaviour {
 		}
 	}
 
+	//add snek middle as long as the snek is not TOO BIG
 	void CreateSumSnake (Vector3 pos){
 		if (!SnakeTest.tooBIG) {
 			SnakeTest.middles.Add (Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject, new Vector3 (pos.x, pos.y, pos.z), Quaternion.identity));
