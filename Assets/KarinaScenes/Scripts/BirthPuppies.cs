@@ -5,6 +5,7 @@ using UnityEngine;
 public class BirthPuppies : MonoBehaviour {
 
 	public static List<GameObject> puppies = new List<GameObject> ();
+	public List<Vector3> puppyPos = new List<Vector3> ();
 	//static GameObject aPup;
 
 	public int pupCount; 
@@ -21,8 +22,9 @@ public class BirthPuppies : MonoBehaviour {
 	}
 
 	void GiveBirth(){
-		for (int i = 0; i <= pupCount; i++) {
-			puppies.Add (Instantiate ((Resources.Load ("Puppy")) as GameObject, gameObject.transform.position, Quaternion.identity));
+		for (int i = 0; i < pupCount; i++) {
+			puppyPos [i] = new Vector3 ((gameObject.transform.position.x+Random.Range (-1f, 1f)),(gameObject.transform.position.y+Random.Range (-1f, 1f)),0);
+			puppies.Add (Instantiate ((Resources.Load ("Puppy")) as GameObject, puppyPos[i], Quaternion.identity));
 		}
 	
 	}
