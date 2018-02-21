@@ -10,6 +10,9 @@ public class SnakeMovement : MonoBehaviour {
 	private bool moveToPoint = false;
 	private Vector3 endPosition;
 
+	int dirNum = 0;
+	int moveCount = 0;
+
 	// Use this for initialization
 	void Start () {
 		endPosition = transform.position;
@@ -27,43 +30,48 @@ public class SnakeMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-			if (Input.GetKeyDown(KeyCode.A)) //Left
+		if (dirNum == 0) //Left
 			{
 				endPosition = new Vector3(endPosition.x - distanceToMove, endPosition.y, endPosition.z);
 				transform.rotation = Quaternion.Euler (0, 0, 0);
 				Vector3 aDir = new Vector3 (0, 0, 0);
 				MoveSumSnake (aDir);
 				SnakeTest.lastpos = endPosition;
+				moveCount--;
 				moveToPoint = true;
 			}
-			if (Input.GetKeyDown(KeyCode.D)) //Right
+		if (dirNum == 1) //Right
 			{
 				endPosition = new Vector3(endPosition.x + distanceToMove, endPosition.y, endPosition.z);
 				transform.rotation = Quaternion.Euler (0, 0, -180);
 				Vector3 aDir = new Vector3 (0, 0, -180);
 				MoveSumSnake (aDir);
 				SnakeTest.lastpos = endPosition;
+				moveCount--;
 				moveToPoint = true;
 			}
-			if (Input.GetKeyDown(KeyCode.W)) //Up
+		if (dirNum == 2) //Up
 			{
 				endPosition = new Vector3(endPosition.x, endPosition.y + distanceToMove, endPosition.z);
 				transform.rotation = Quaternion.Euler (0, 0, -90);
 				Vector3 aDir = new Vector3 (0, 0, -90);
 				MoveSumSnake (aDir);
 				SnakeTest.lastpos = endPosition;
-
+				moveCount--;
 				moveToPoint = true;
 			}
-			if (Input.GetKeyDown (KeyCode.S)) { //Down
+		if (dirNum == 3) { //Down
 				endPosition = new Vector3 (endPosition.x, endPosition.y - distanceToMove, endPosition.z);
 				transform.rotation = Quaternion.Euler (0, 0, -260);
 				Vector3 aDir = new Vector3 (0, 0, -260);
 				MoveSumSnake (aDir);
 				SnakeTest.lastpos = endPosition;
+				moveCount--;
 				moveToPoint = true;
 			}
-
+		if (moveCount <= 0) {
+			SetMove ();
+		}
 	}
 		
 	void MoveSumSnake(Vector3 dir){
@@ -83,6 +91,11 @@ public class SnakeMovement : MonoBehaviour {
 				SnakeTest.middles [i].transform.rotation = Quaternion.Euler (newDir.x, newDir.y, newDir.z);
 			}
 		}
+	}
+
+	void SetMove(){
+		moveCount = Random.Range (2, 6);
+		dirNum = Random.Range (0, 4);
 	}
 
 	//add snek middle as long as the snek is not TOO BIG

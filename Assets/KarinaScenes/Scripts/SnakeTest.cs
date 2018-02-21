@@ -33,7 +33,7 @@ public class SnakeTest : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		//replace this check with whatever Duncan is doing
-		if(other.gameObject.name == "Light"){
+		if(other.gameObject.tag == "PixelColliders"){
 			if (middles.Count == 0) {
 				RemoveWienie ();
 			}
