@@ -25,9 +25,9 @@ public class EnemyManager : MonoBehaviour {
 //	System.Type[] enemySubclassList = ReflectionHelper.GetSubclasses (typeof(EnemyBaseClass));
 
 	void Awake(){
-		for (int i = 0; i < 20; i++) {
-			SpawnEnemy ();
-		}
+//		for (int i = 0; i < 20; i++) {
+//			SpawnEnemy ();
+//		}
 	}
 
 	// Update is called once per frame
@@ -66,7 +66,7 @@ public class EnemyManager : MonoBehaviour {
 				newEnemy = inactiveEnemies [i];
 				activeEnemies.Add (newEnemy);
 				inactiveEnemies.RemoveAt (i);
-				newEnemy.Reset ();
+				newEnemy.Reset (); 
 				return;
 			}
 		}
@@ -79,7 +79,7 @@ public class EnemyManager : MonoBehaviour {
 
 		allEnemies.Add (newEnemy);
 		activeEnemies.Add (newEnemy);
-		newEnemy.Reset ();
+//		newEnemy.Reset (); //probably don't want this, should just use Awake
 	}
 
 	//Call the destroy function on all enemies, which will trigger animation and then call EnemyIsDestroyed on this class

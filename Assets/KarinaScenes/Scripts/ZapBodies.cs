@@ -25,6 +25,6 @@ public class ZapBodies : MonoBehaviour {
 
 	//run this when the middle of snake body hits light
 	void RemoveSnakeBodies(){
-		SnakeTest.middles.Remove (gameObject);
+//		SnakeTest.middles.Remove (gameObject);
 	}
 }

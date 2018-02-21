@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public abstract class EnemyBaseClass : MonoBehaviour {
 
-	protected Collider2D col;
+	protected Collider2D[] allCols;
 
 	public virtual void Reset(){
 		gameObject.SetActive (true);
-		gameObject.transform.position = new Vector3 (Random.Range (-5f, 5f), Random.Range (-5f, 5f), 0);
+		for (int i = 0; i < allCols.Length; i++) {
+			allCols[i].enabled = true;
+		}
 	}
 		
 	public virtual void DestroyEnemy(){
-		col.enabled = false;
+		for (int i = 0; i < allCols.Length; i++) {
+			allCols[i].enabled = false;
+		}
 
 		//DO ANIMATION
 

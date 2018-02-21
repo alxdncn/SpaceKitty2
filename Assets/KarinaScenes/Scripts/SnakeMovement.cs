@@ -2,109 +2,214 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeMovement : MonoBehaviour {
-
+public class SnakeMovement : EnemyBaseClass {
 
 	[SerializeField] private float distanceToMove;
 	[SerializeField] private float moveSpeed;
-	private bool moveToPoint = false;
 	private Vector3 endPosition;
 
 	int dirNum = 0;
 	int moveCount = 0;
 
-	// Use this for initialization
-	void Start () {
+	[Tooltip("Should be one of the following values: 4, 6, 8, 10, 12, 14")]
+	[SerializeField] [Range(4, 14)] int directionRandomRange = 10;
+	[SerializeField] int maxMoves = 6;
+	[SerializeField] int minMoves = 2;
+
+	Transform myHead;
+	Transform myButt;
+
+	List<GameObject> middles = new List<GameObject>();
+	List<GameObject> inactiveMiddles = new List<GameObject>();
+
+	int middleCount = 6;
+
+	[SerializeField] float moveTime = 0.3f;
+	float moveTimer = 0f;
+
+	enum Directions {
+		Up, 
+		Down,
+		Left,
+		Right
+	}
+
+	Directions direction;
+
+	void Awake(){
+		middles.Add (Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject, new Vector3 (1.8f, 1.2f, 0f), Quaternion.identity));
+		myButt = transform.Find ("SnakeButt");
+		myHead = transform.Find ("SnakeHead");
+		allCols = GetComponentsInChildren<BoxCollider2D> ();
+
 		endPosition = transform.position;
 
-	}
-
-	void FixedUpdate () {
-		if (moveToPoint)
-		{
-			transform.position = Vector3.MoveTowards(transform.position, endPosition, moveSpeed * Time.deltaTime);
+		for (int i = 0; i < middleCount; i++) {
+			CreateSnakeMiddle (endPosition, true);
 		}
 
+	}
+
+	public override void Reset(){
+		Debug.Log ("In Reset");
+		base.Reset ();
+		endPosition = transform.position;
+
+		int inactiveMiddleCount = inactiveMiddles.Count;
+
+		for (int i = 0; i < inactiveMiddleCount; i++) {
+			CreateSnakeMiddle (endPosition, false);
+		}
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (dirNum == 0) //Left
-			{
-				endPosition = new Vector3(endPosition.x - distanceToMove, endPosition.y, endPosition.z);
-				transform.rotation = Quaternion.Euler (0, 0, 0);
-				Vector3 aDir = new Vector3 (0, 0, 0);
-				MoveSumSnake (aDir);
-				SnakeTest.lastpos = endPosition;
-				moveCount--;
-				moveToPoint = true;
+
+	void Update(){
+		if (moveTimer > moveTime) {
+			Move ();
+			moveTimer = 0;
+		}
+			
+		moveTimer += Time.deltaTime;
+	}
+
+	void MoveSumSnake(Vector3 dir){
+		Vector3 newDir;
+		if (middles.Count > 0) {
+			myButt.transform.position = middles [middles.Count - 1].transform.position;
+			newDir = middles [middles.Count - 1].transform.eulerAngles;
+		} else {
+			myButt.transform.position = endPosition;
+			newDir = myHead.eulerAngles;
+		}
+
+		myButt.transform.rotation = Quaternion.Euler (newDir.x, newDir.y, newDir.z);
+		for (int i = middles.Count - 1; i >= 0; i--) {
+			if (i == 0) {
+				middles [i].transform.position = endPosition;
+				middles [i].transform.rotation = Quaternion.Euler(dir.x, dir.y, dir.z);
+			} else {
+				middles [i].transform.position = middles [i-1].transform.position;
+				newDir = middles [i - 1].transform.rotation.eulerAngles;
+				middles [i].transform.rotation = Quaternion.Euler (newDir.x, newDir.y, newDir.z);
 			}
-		if (dirNum == 1) //Right
-			{
-				endPosition = new Vector3(endPosition.x + distanceToMove, endPosition.y, endPosition.z);
-				transform.rotation = Quaternion.Euler (0, 0, -180);
-				Vector3 aDir = new Vector3 (0, 0, -180);
-				MoveSumSnake (aDir);
-				SnakeTest.lastpos = endPosition;
-				moveCount--;
-				moveToPoint = true;
-			}
-		if (dirNum == 2) //Up
-			{
-				endPosition = new Vector3(endPosition.x, endPosition.y + distanceToMove, endPosition.z);
-				transform.rotation = Quaternion.Euler (0, 0, -90);
-				Vector3 aDir = new Vector3 (0, 0, -90);
-				MoveSumSnake (aDir);
-				SnakeTest.lastpos = endPosition;
-				moveCount--;
-				moveToPoint = true;
-			}
-		if (dirNum == 3) { //Down
-				endPosition = new Vector3 (endPosition.x, endPosition.y - distanceToMove, endPosition.z);
-				transform.rotation = Quaternion.Euler (0, 0, -260);
-				Vector3 aDir = new Vector3 (0, 0, -260);
-				MoveSumSnake (aDir);
-				SnakeTest.lastpos = endPosition;
-				moveCount--;
-				moveToPoint = true;
-			}
+		}
+	}
+
+	protected override void Move ()
+	{
+		if (direction == Directions.Left) //Left
+		{
+			TakeStep(0, new Vector2(-distanceToMove, 0));
+		}
+		else if (direction == Directions.Right) //Right
+		{
+			TakeStep(-180, new Vector2(distanceToMove, 0));
+		}
+		else if (direction == Directions.Up) //Up
+		{
+			TakeStep(-90, new Vector2(0, distanceToMove));
+		}
+		else if (direction == Directions.Down) { //Down
+			TakeStep(-270, new Vector2(0, -distanceToMove));
+		}
 		if (moveCount <= 0) {
 			SetMove ();
 		}
 	}
-		
-	void MoveSumSnake(Vector3 dir){
-		SnakeTest.myButt.transform.position = SnakeTest.middles [SnakeTest.middles.Count - 1].transform.position;
-		Vector3 newDir = SnakeTest.middles [SnakeTest.middles.Count - 1].transform.rotation.eulerAngles;
 
-		SnakeTest.myButt.transform.rotation = Quaternion.Euler (newDir.x, newDir.y, newDir.z);
-		for (int i = SnakeTest.middles.Count; i >= 0; i--) {
-			if (i == 0) {
-				SnakeTest.middles [i].transform.position = SnakeTest.lastpos;
-				SnakeTest.middles [i].transform.rotation = Quaternion.Euler(dir.x, dir.y, dir.z);
-			} else if(i == SnakeTest.middles.Count){
-				CreateSumSnake(SnakeTest.middles [i-1].transform.position);
-			}else {
-				SnakeTest.middles [i].transform.position = SnakeTest.middles [i-1].transform.position;
-				newDir = SnakeTest.middles [i - 1].transform.rotation.eulerAngles;
-				SnakeTest.middles [i].transform.rotation = Quaternion.Euler (newDir.x, newDir.y, newDir.z);
-			}
-		}
+	void TakeStep(float zAngle, Vector2 posChange){
+		Vector3 aDir = new Vector3 (0, 0, zAngle);
+		MoveSumSnake (aDir);
+		endPosition = new Vector3 (endPosition.x + posChange.x, endPosition.y + posChange.y, endPosition.z);
+		myHead.position = endPosition;
+		myHead.rotation = Quaternion.Euler (0, 0, zAngle);
+		moveCount--;
 	}
 
 	void SetMove(){
-		moveCount = Random.Range (2, 6);
-		dirNum = Random.Range (0, 4);
+		moveCount = Random.Range (minMoves, maxMoves);
+		dirNum = Random.Range (0, directionRandomRange);
+
+		bool aboveKitty = true;
+		bool rightOfKitty = true;
+
+		if(myHead.position.y < Kitty.trans.position.y){
+			aboveKitty = false;
+		}
+		if (myHead.position.x < Kitty.trans.position.x) {
+			rightOfKitty = false;
+		}
+
+		if (aboveKitty) {
+			if (rightOfKitty) {
+				if (dirNum < Mathf.RoundToInt((directionRandomRange - 2) / 2)) {
+					direction = Directions.Down;
+				} else if (dirNum < directionRandomRange - 2) {
+					direction = Directions.Left;
+				} else if (dirNum == directionRandomRange - 2) {
+					direction = Directions.Up;
+				} else if (dirNum == directionRandomRange - 1) {
+					direction = Directions.Right;
+				}
+			} else {
+				if (dirNum < Mathf.RoundToInt((directionRandomRange - 2) / 2)) {
+					direction = Directions.Down;
+				} else if (dirNum < directionRandomRange - 2) {
+					direction = Directions.Right;
+				} else if (dirNum == directionRandomRange - 2) {
+					direction = Directions.Up;
+				} else if (dirNum == directionRandomRange - 1) {
+					direction = Directions.Left;
+				}
+			}
+		} else {
+			if (rightOfKitty) {
+				if (dirNum < Mathf.RoundToInt((directionRandomRange - 2) / 2)) {
+					direction = Directions.Up;
+				} else if (dirNum < directionRandomRange - 2) {
+					direction = Directions.Left;
+				} else if (dirNum == directionRandomRange - 2) {
+					direction = Directions.Down;
+				} else if (dirNum == directionRandomRange - 1) {
+					direction = Directions.Right;
+				}
+			} else {
+				if (dirNum < Mathf.RoundToInt((directionRandomRange - 2) / 2)) {
+					direction = Directions.Up;
+				} else if (dirNum < directionRandomRange - 2) {
+					direction = Directions.Right;
+				} else if (dirNum == directionRandomRange - 2) {
+					direction = Directions.Down;
+				} else if (dirNum == directionRandomRange - 1) {
+					direction = Directions.Left;
+				}
+			}
+		}
+
 	}
 
 	//add snek middle as long as the snek is not TOO BIG
-	void CreateSumSnake (Vector3 pos){
-		if (!SnakeTest.tooBIG) {
-			SnakeTest.middles.Add (Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject, new Vector3 (pos.x, pos.y, pos.z), Quaternion.identity));
-			if (SnakeTest.middles.Count >= 6) {
-				SnakeTest.tooBIG = true;
-			}
+	void CreateSnakeMiddle (Vector3 pos, bool init){
+		if (init) {
+			middles.Add (Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject, new Vector3 (pos.x, pos.y, pos.z), Quaternion.identity));
+		} else {
+			Debug.Log (inactiveMiddles.Count);
+			GameObject newMiddle = inactiveMiddles [0];
+			inactiveMiddles.RemoveAt (0);
+			middles.Add (newMiddle);
+			newMiddle.SetActive (true);
+		}
+	}
+
+	public override void DestroyEnemy ()
+	{
+		if (middles.Count == 0) {
+			EnemyManager.Instance.EnemyIsDestroyed (this);
+		} else {
+			GameObject killMiddle = middles [middles.Count - 1];
+			inactiveMiddles.Add (killMiddle);
+			middles.Remove(killMiddle);
+			killMiddle.SetActive (false);
 		}
 	}
 }

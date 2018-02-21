@@ -6,11 +6,11 @@ public class PlaySound : MonoBehaviour {
 
 	float playPoint = 3f;
 	public AudioClip bark;
-	public AudioSource mySource;
+	AudioSource mySource;
 
 	// Use this for initialization
 	void Start () {
-		
+		mySource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
