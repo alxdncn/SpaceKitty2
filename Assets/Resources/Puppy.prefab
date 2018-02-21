@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4699083330073566}
   - component: {fileID: 212809220636840906}
+  - component: {fileID: 114842688008518124}
   m_Layer: 0
   m_Name: Puppy
   m_TagString: Untagged
@@ -35,11 +36,24 @@ Transform:
   m_GameObject: {fileID: 1520594409136538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.6187053, y: 3.6705077, z: -0.1290553}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114842688008518124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520594409136538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0368f0e11eee44431b4dd7ff52d5edd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  vel: {x: 1, y: 1, z: 0}
 --- !u!212 &212809220636840906
 SpriteRenderer:
   m_ObjectHideFlags: 1
