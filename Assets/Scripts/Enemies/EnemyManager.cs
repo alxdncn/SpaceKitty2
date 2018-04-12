@@ -22,8 +22,6 @@ public class EnemyManager : MonoBehaviour {
 	List<EnemyBaseClass> activeEnemies = new List<EnemyBaseClass> ();
 	List<EnemyBaseClass> inactiveEnemies = new List<EnemyBaseClass> ();
 
-//	System.Type[] enemySubclassList = ReflectionHelper.GetSubclasses (typeof(EnemyBaseClass));
-
 	void Awake(){
 //		for (int i = 0; i < 20; i++) {
 //			SpawnEnemy ();
