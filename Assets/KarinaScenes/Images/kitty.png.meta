@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1538d0d34c4b343f5b5ae7689573038d
-timeCreated: 1525806501
+timeCreated: 1525903361
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -86,12 +86,12 @@ TextureImporter:
       name: kitty_0
       rect:
         serializedVersion: 2
-        x: 127
-        y: 1252
-        width: 2565
-        height: 2891
+        x: 181
+        y: 1329
+        width: 2325
+        height: 2023
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -105,7 +105,7 @@ TextureImporter:
         width: 2286
         height: 2380
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -119,7 +119,7 @@ TextureImporter:
         width: 2216
         height: 1833
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -133,7 +133,7 @@ TextureImporter:
         width: 396
         height: 380
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,7 +147,7 @@ TextureImporter:
         width: 294
         height: 333
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
