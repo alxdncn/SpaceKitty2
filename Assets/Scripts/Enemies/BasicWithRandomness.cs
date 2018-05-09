@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kitty : MonoBehaviour {
-
-	public static Transform trans;
+public class BasicWithRandomness : MonoBehaviour {
 
 	// Use this for initialization
-	void Awake () {
-		trans = transform;
+	void Start () {
+		
 	}
 	
 	// Update is called once per frame

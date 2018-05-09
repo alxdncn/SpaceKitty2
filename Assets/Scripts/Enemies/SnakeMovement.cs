@@ -5,7 +5,6 @@ using UnityEngine;
 public class SnakeMovement : EnemyBaseClass {
 
 	[SerializeField] private float distanceToMove;
-	[SerializeField] private float moveSpeed;
 	private Vector3 endPosition;
 
 	int dirNum = 0;
@@ -27,6 +26,8 @@ public class SnakeMovement : EnemyBaseClass {
 	[SerializeField] float moveTime = 0.3f;
 	float moveTimer = 0f;
 
+//	[SerializeField] new float coolDownTime;
+
 	enum Directions {
 		Up, 
 		Down,
@@ -36,8 +37,11 @@ public class SnakeMovement : EnemyBaseClass {
 
 	Directions direction;
 
-	void Awake(){
-		middles.Add (Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject, new Vector3 (1.8f, 1.2f, 0f), Quaternion.identity));
+	protected override void Awake(){
+		base.Awake ();
+		startHitPoints = middleCount;
+		hitPoints = startHitPoints;
+
 		myButt = transform.Find ("SnakeButt");
 		myHead = transform.Find ("SnakeHead");
 		allCols = GetComponentsInChildren<BoxCollider2D> ();
@@ -53,6 +57,7 @@ public class SnakeMovement : EnemyBaseClass {
 	public override void Reset(){
 		Debug.Log ("In Reset");
 		base.Reset ();
+
 		endPosition = transform.position;
 
 		int inactiveMiddleCount = inactiveMiddles.Count;
@@ -63,13 +68,22 @@ public class SnakeMovement : EnemyBaseClass {
 
 	}
 
-	void Update(){
+	protected override void Update(){
 		if (moveTimer > moveTime) {
 			Move ();
 			moveTimer = 0;
 		}
 			
 		moveTimer += Time.deltaTime;
+
+		if (hit) {
+			if (coolDownTimer > coolDownTime) {
+				coolDownTimer = 0f;
+				hit = false;
+			}
+
+			coolDownTimer += Time.deltaTime;
+		}
 	}
 
 	void MoveSumSnake(Vector3 dir){
@@ -133,12 +147,23 @@ public class SnakeMovement : EnemyBaseClass {
 		bool aboveKitty = true;
 		bool rightOfKitty = true;
 
+<<<<<<< HEAD:Assets/KarinaScenes/Scripts/SnakeMovement.cs
 //		if(myHead.position.y < Kitty.trans.position.y){
 //			aboveKitty = false;
 //		}
 //		if (myHead.position.x < Kitty.trans.position.x) {
 //			rightOfKitty = false;
 //		}
+=======
+		Vector2 distFromKitty = GetVectorToKitty (myHead);
+
+		if(distFromKitty.y < 0){
+			aboveKitty = false;
+		}
+		if (distFromKitty.x < 0){
+			rightOfKitty = false;
+		}
+>>>>>>> 0e52cf09873c4a1603869260e04b28f7229c1849:Assets/Scripts/Enemies/SnakeMovement.cs
 
 		if (aboveKitty) {
 			if (rightOfKitty) {
@@ -191,7 +216,11 @@ public class SnakeMovement : EnemyBaseClass {
 	//add snek middle as long as the snek is not TOO BIG
 	void CreateSnakeMiddle (Vector3 pos, bool init){
 		if (init) {
-			middles.Add (Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject, new Vector3 (pos.x, pos.y, pos.z), Quaternion.identity));
+			GameObject newMiddle = Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject);
+			newMiddle.transform.parent = this.transform;
+			newMiddle.transform.localPosition = new Vector3 (0f, 0f, 0f);
+
+			middles.Add (newMiddle);
 		} else {
 			Debug.Log (inactiveMiddles.Count);
 			GameObject newMiddle = inactiveMiddles [0];
@@ -201,15 +230,12 @@ public class SnakeMovement : EnemyBaseClass {
 		}
 	}
 
-	public override void DestroyEnemy ()
+	protected override void HitEnemy ()
 	{
-		if (middles.Count == 0) {
-			EnemyManager.Instance.EnemyIsDestroyed (this);
-		} else {
-			GameObject killMiddle = middles [middles.Count - 1];
-			inactiveMiddles.Add (killMiddle);
-			middles.Remove(killMiddle);
-			killMiddle.SetActive (false);
-		}
+		base.HitEnemy ();
+		GameObject killMiddle = middles [middles.Count - 1];
+		inactiveMiddles.Add (killMiddle);
+		middles.Remove (killMiddle);
+		killMiddle.SetActive (false);
 	}
 }
