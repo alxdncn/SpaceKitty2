@@ -10,6 +10,7 @@ public class ReadLightPixels : MonoBehaviour {
 	List<GameObject> colliderPool = new List<GameObject>();
 
 	[SerializeField] float waitTimer = 3f;
+	bool startedWebcam = false;
 
 	float camSize;
 	float camX;
@@ -33,6 +34,9 @@ public class ReadLightPixels : MonoBehaviour {
 		if (waitTimer > 0) {
 			waitTimer -= Time.deltaTime;
 			return;
+		} else if(!startedWebcam){
+			startedWebcam = true;
+			GameStateManager.instance.RunGame();
 		}
 
 		int numLightPixels = Mathf.Max(webCamScript.brightPixelPositions.Count, colliderPool.Count);

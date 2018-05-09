@@ -21,18 +21,59 @@ public class EnemyManager : MonoBehaviour {
 	List<EnemyBaseClass> allEnemies = new List<EnemyBaseClass>();
 	List<EnemyBaseClass> activeEnemies = new List<EnemyBaseClass> ();
 	List<EnemyBaseClass> inactiveEnemies = new List<EnemyBaseClass> ();
+    
+    [SerializeField] float startSpawnTime = 2f;
+    [SerializeField] float endSpawnTime = 0.5f;
+    float currentSpawnTime;
+    float spawnTimer = 0;
+    
+    [SerializeField] float startBurstTime = 20f;
+    [SerializeField] float endBurstTime = 5f;
+    float currentBurstTime;
+    float burstTimer = 0;
+    
+    [SerializeField] int startBurstNumber = 4;
+    [SerializeField] int endBurstNumber = 20;
+    int burstNumber;
+    
+    [SerializeField] float roundTime = 60f;
+    
+    public float maxY;
+    public float minY;
+    public float maxX;
+    public float minX;
 
 	void Awake(){
-//		for (int i = 0; i < 20; i++) {
-//			SpawnEnemy ();
-//		}
+        currentSpawnTime = startSpawnTime;
+        currentBurstTime = startBurstTime;
+        burstNumber = startBurstNumber;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			SpawnEnemy ();
-		}
+        spawnTimer += GameStateManager.instance.DeltaTime;
+        burstTimer += GameStateManager.instance.DeltaTime;
+                
+        float roundFraction = GameStateManager.instance.Time / roundTime;
+        
+        if(roundFraction > 1){
+			GameStateManager.instance.Pause();
+            return;
+        }
+        
+        if(spawnTimer > currentSpawnTime){
+            SpawnEnemy();
+            spawnTimer = 0;
+            currentSpawnTime = (startSpawnTime * (1 - roundFraction) + endSpawnTime * roundFraction);
+        }
+        if(burstTimer > currentBurstTime){
+            for(int i = 0; i < burstNumber; i++){
+                SpawnEnemy();
+            }
+            burstTimer = 0;
+            currentBurstTime = (startBurstTime * (1 - roundFraction) + endBurstTime * roundFraction);
+            burstNumber = Mathf.RoundToInt(startBurstNumber * (1 - roundFraction) + endBurstNumber * roundFraction);
+        }
 	}
 
 	void ShuffleAndReplenishBag(){

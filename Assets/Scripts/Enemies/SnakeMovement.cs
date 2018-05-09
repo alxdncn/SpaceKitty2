@@ -213,7 +213,6 @@ public class SnakeMovement : EnemyBaseClass {
 
 			middles.Add (newMiddle);
 		} else {
-			Debug.Log (inactiveMiddles.Count);
 			GameObject newMiddle = inactiveMiddles [0];
 			inactiveMiddles.RemoveAt (0);
 			middles.Add (newMiddle);

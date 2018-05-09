@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +17,11 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	protected virtual void Awake(){
 		hitPoints = startHitPoints;
+        transform.position = GetPosition(EnemyManager.Instance.minX, EnemyManager.Instance.maxX, EnemyManager.Instance.minY, EnemyManager.Instance.maxY);
 	}
 
 	public virtual void Reset(){
+        transform.position = GetPosition(EnemyManager.Instance.minX, EnemyManager.Instance.maxX, EnemyManager.Instance.minY, EnemyManager.Instance.maxY);
 		gameObject.SetActive (true);
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = true;
@@ -27,6 +29,22 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		hitPoints = startHitPoints;
 		hit = false;
 	}
+    
+    Vector3 GetPosition(float minX, float maxX, float minY, float maxY){
+        int side = Random.Range(0,4);
+
+        switch(side){
+            case 0: //Left
+                return new Vector3(minX, Random.Range(minY, maxY), 0);
+            case 1: //Right
+                return new Vector3(maxX, Random.Range(minY, maxY), 0);
+            case 2: //Bottom
+                return new Vector3(Random.Range(minX, maxX), minY, 0);
+            case 3: //Top
+                return new Vector3(Random.Range(minX, maxX), maxY, 0);
+        }
+        return Vector3.zero;
+    }
 
 	protected virtual void Update(){
 		Move ();
@@ -68,6 +86,8 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	}
 
 	public virtual void DestroyEnemy(){
+		GameStateManager.instance.ChangeScore();
+
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = false;
 		}

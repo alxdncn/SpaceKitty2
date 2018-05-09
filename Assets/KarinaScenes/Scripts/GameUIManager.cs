@@ -7,18 +7,26 @@ public class GameUIManager : MonoBehaviour {
 
 	public Text scoreText;
 	public Text timeText;
-	ScoreScript scoreScript;
-
 
 	// Use this for initialization
 	void Start () {
-		GameObject scoreManager = GameObject.Find("ScoreManager");
-		scoreScript = scoreManager.GetComponent<ScoreScript>();	
+	}
+
+	void OnEnable(){
+		GameStateManager.instance.onScoreChanged += OnScoreChanged;
+	}
+
+	void OnDisable(){
+		GameStateManager.instance.onScoreChanged -= OnScoreChanged;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		scoreText.text = "SCORE: " + scoreScript.score;
-		timeText.text = string.Format("{0}:{1:00}", (int)scoreScript.time / 60, (int)scoreScript.time % 60);
+		
+		timeText.text = string.Format("{0}:{1:00}", (int)GameStateManager.instance.Time / 60, (int)GameStateManager.instance.Time % 60);
+	}
+
+	void OnScoreChanged(){
+		scoreText.text = "SCORE: " + GameStateManager.instance.Score;
 	}
 }
