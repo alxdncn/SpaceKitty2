@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -147,14 +147,6 @@ public class SnakeMovement : EnemyBaseClass {
 		bool aboveKitty = true;
 		bool rightOfKitty = true;
 
-<<<<<<< HEAD:Assets/KarinaScenes/Scripts/SnakeMovement.cs
-//		if(myHead.position.y < Kitty.trans.position.y){
-//			aboveKitty = false;
-//		}
-//		if (myHead.position.x < Kitty.trans.position.x) {
-//			rightOfKitty = false;
-//		}
-=======
 		Vector2 distFromKitty = GetVectorToKitty (myHead);
 
 		if(distFromKitty.y < 0){
@@ -163,7 +155,6 @@ public class SnakeMovement : EnemyBaseClass {
 		if (distFromKitty.x < 0){
 			rightOfKitty = false;
 		}
->>>>>>> 0e52cf09873c4a1603869260e04b28f7229c1849:Assets/Scripts/Enemies/SnakeMovement.cs
 
 		if (aboveKitty) {
 			if (rightOfKitty) {
