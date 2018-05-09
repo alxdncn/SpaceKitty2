@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: clouds
+    uniqueID: 27810801
+    locked: 0
+  - name: stars
+    uniqueID: 1257995397
+    locked: 0

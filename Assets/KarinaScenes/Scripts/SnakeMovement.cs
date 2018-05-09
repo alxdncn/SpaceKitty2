@@ -133,12 +133,12 @@ public class SnakeMovement : EnemyBaseClass {
 		bool aboveKitty = true;
 		bool rightOfKitty = true;
 
-		if(myHead.position.y < Kitty.trans.position.y){
-			aboveKitty = false;
-		}
-		if (myHead.position.x < Kitty.trans.position.x) {
-			rightOfKitty = false;
-		}
+//		if(myHead.position.y < Kitty.trans.position.y){
+//			aboveKitty = false;
+//		}
+//		if (myHead.position.x < Kitty.trans.position.x) {
+//			rightOfKitty = false;
+//		}
 
 		if (aboveKitty) {
 			if (rightOfKitty) {
