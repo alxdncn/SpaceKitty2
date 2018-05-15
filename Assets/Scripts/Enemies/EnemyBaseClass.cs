@@ -86,8 +86,6 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	}
 
 	public virtual void DestroyEnemy(){
-		GameStateManager.instance.ChangeScore();
-
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = false;
 		}
@@ -101,8 +99,11 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		if (col.gameObject.tag == "PixelColliders" && !hit) {
 			HitEnemy ();
 			if (hitPoints <= 0) {
+				GameStateManager.instance.ChangeScore();
 				DestroyEnemy ();
 			}
+		} else if(col.gameObject.tag == "Kitty"){
+			DestroyEnemy();
 		}
 	}
 }

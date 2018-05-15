@@ -55,7 +55,6 @@ public class SnakeMovement : EnemyBaseClass {
 	}
 
 	public override void Reset(){
-		Debug.Log ("In Reset");
 		base.Reset ();
 
 		endPosition = transform.position;
