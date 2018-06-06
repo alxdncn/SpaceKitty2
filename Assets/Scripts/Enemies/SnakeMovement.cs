@@ -26,6 +26,9 @@ public class SnakeMovement : EnemyBaseClass {
 	[SerializeField] float moveTime = 0.3f;
 	float moveTimer = 0f;
 
+	Animator animator;
+	[SerializeField] Transform childExplosion;
+
 //	[SerializeField] new float coolDownTime;
 
 	enum Directions {
@@ -38,7 +41,6 @@ public class SnakeMovement : EnemyBaseClass {
 	Directions direction;
 
 	protected override void Awake(){
-		base.Awake ();
 		startHitPoints = middleCount;
 		hitPoints = startHitPoints;
 
@@ -52,6 +54,9 @@ public class SnakeMovement : EnemyBaseClass {
 			CreateSnakeMiddle (endPosition, true);
 		}
 
+		animator = GetComponent<Animator>();
+
+		base.Awake ();
 	}
 
 	public override void Reset(){
@@ -64,25 +69,19 @@ public class SnakeMovement : EnemyBaseClass {
 		for (int i = 0; i < inactiveMiddleCount; i++) {
 			CreateSnakeMiddle (endPosition, false);
 		}
-
 	}
 
 	protected override void Update(){
-		if (moveTimer > moveTime) {
-			Move ();
-			moveTimer = 0;
-		}
-			
-		moveTimer += Time.deltaTime;
-
-		if (hit) {
-			if (coolDownTimer > coolDownTime) {
-				coolDownTimer = 0f;
-				hit = false;
+		if(!hit){
+			if (moveTimer > moveTime) {
+				Move ();
+				moveTimer = 0;
 			}
-
-			coolDownTimer += Time.deltaTime;
+				
+			moveTimer += Time.deltaTime;
 		}
+
+		HandleCooldown();
 	}
 
 	void MoveSumSnake(Vector3 dir){
@@ -223,8 +222,24 @@ public class SnakeMovement : EnemyBaseClass {
 	{
 		base.HitEnemy ();
 		GameObject killMiddle = middles [middles.Count - 1];
+
+		childExplosion.transform.parent = null;
+		childExplosion.transform.position = killMiddle.transform.position;
+		animator.Play("SnakeMiddleExplode");
+
 		inactiveMiddles.Add (killMiddle);
 		middles.Remove (killMiddle);
 		killMiddle.SetActive (false);
+	}
+
+	public override void DestroyEnemy(){
+		ResetChildExplosion();
+		base.DestroyEnemy();
+	}
+
+	void ResetChildExplosion(){
+		animator.Play("Base");
+		childExplosion.transform.parent = transform;
+		childExplosion.transform.localPosition = Vector3.zero;
 	}
 }

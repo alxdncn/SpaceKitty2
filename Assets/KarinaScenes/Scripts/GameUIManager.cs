@@ -10,20 +10,21 @@ public class GameUIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		OnKittyHit();
 	}
 
 	void OnEnable(){
 		GameStateManager.instance.onScoreChanged += OnScoreChanged;
+		Kitty.instance.kittyHit += OnKittyHit;
 	}
 
 	void OnDisable(){
 		GameStateManager.instance.onScoreChanged -= OnScoreChanged;
+		Kitty.instance.kittyHit -= OnKittyHit;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-		timeText.text = string.Format("{0}:{1:00}", (int)GameStateManager.instance.Time / 60, (int)GameStateManager.instance.Time % 60);
+	void OnKittyHit(){
+		timeText.text = Kitty.instance.lives.ToString();
 	}
 
 	void OnScoreChanged(){

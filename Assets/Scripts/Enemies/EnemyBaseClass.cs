@@ -6,18 +6,47 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	protected Collider2D[] allCols;
 
+	protected List<SpriteRenderer> allSprites;
+
 	protected float coolDownTimer = 0f;
 	[SerializeField] protected float coolDownTime = 0.5f;
 	protected bool hit = false;
+
+	[SerializeField] protected float cooldownFadeTime = 0.5f;
+	float cooldownFadeTimer;
+	bool faded = false;
+
+	[SerializeField] [Range(0,1)] float cooldownAlpha = 0.5f;
 
 	[SerializeField] protected int startHitPoints = 1;
 	protected int hitPoints;
 
 	[SerializeField] protected float movementSpeed = 10f;
 
+	[SerializeField] Animator deathAnimator;
+	protected string deathAnimationName = "Die";
+	Transform deathAnimatorParent;
+	Vector3 deathAnimatorStartPosition;
+
 	protected virtual void Awake(){
 		hitPoints = startHitPoints;
         transform.position = GetPosition(EnemyManager.Instance.minX, EnemyManager.Instance.maxX, EnemyManager.Instance.minY, EnemyManager.Instance.maxY);
+		deathAnimatorParent = deathAnimator.transform.parent;
+		deathAnimatorStartPosition = deathAnimator.transform.localPosition;
+		SpriteRenderer[] spriteArray = GetComponentsInChildren<SpriteRenderer>();
+
+		SpriteRenderer myRend = GetComponent<SpriteRenderer>();
+
+		allSprites = new List<SpriteRenderer>();
+		if(myRend != null){
+			allSprites.Add(myRend);
+		}
+
+		for(int i = 0; i < spriteArray.Length; i++){
+			if(spriteArray[i].gameObject.layer != LayerMask.NameToLayer("DeathAnimations")){
+				allSprites.Add(spriteArray[i]);
+			}
+		}
 	}
 
 	public virtual void Reset(){
@@ -28,6 +57,8 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		}
 		hitPoints = startHitPoints;
 		hit = false;
+		deathAnimator.transform.parent = deathAnimatorParent;
+		deathAnimator.transform.localPosition = deathAnimatorStartPosition;
 	}
     
     Vector3 GetPosition(float minX, float maxX, float minY, float maxY){
@@ -47,12 +78,39 @@ public abstract class EnemyBaseClass : MonoBehaviour {
     }
 
 	protected virtual void Update(){
-		Move ();
+		if(!hit){
+			Move ();
+		}
+		HandleCooldown();
+	}
+
+	protected void HandleCooldown(){
 		if (hit) {
 			if (coolDownTimer > coolDownTime) {
 				coolDownTimer = 0f;
 				hit = false;
+				for(int i = 0; i < allSprites.Count; i++){
+					allSprites[i].color = new Color(allSprites[i].color.r, allSprites[i].color.g, allSprites[i].color.b, 1f);
+				}
+				return;
 			}
+
+
+			if(cooldownFadeTimer > cooldownFadeTime){
+				faded = !faded;
+				float alpha = 0.8f;
+				if(faded){
+					alpha = cooldownAlpha;
+				}
+				for(int i = 0; i < allSprites.Count; i++){
+					if(allSprites[i].gameObject.activeSelf){
+						allSprites[i].color = new Color(allSprites[i].color.r, allSprites[i].color.g, allSprites[i].color.b, alpha);
+					}
+				}
+				cooldownFadeTimer = 0;
+			}
+
+			cooldownFadeTimer += Time.deltaTime;
 
 			coolDownTimer += Time.deltaTime;
 		}
@@ -71,7 +129,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	}
 
 	protected Vector3 GetVectorToKitty(Transform trans){
-		Vector3 dist = new Vector3 (trans.position.x - Kitty.trans.position.x, trans.position.y - Kitty.trans.position.y, 0);
+		Vector3 dist = new Vector3 (trans.position.x - Kitty.instance.trans.position.x, trans.position.y - Kitty.instance.trans.position.y, 0);
 
 		return dist;
 	}
@@ -83,6 +141,13 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	protected virtual void HitEnemy(){
 		hitPoints--;
 		hit = true;
+		if(hitPoints > 0){
+			faded = true;
+			cooldownFadeTimer = 0f;
+			for(int i = 0; i < allSprites.Count; i++){
+				allSprites[i].color = new Color(allSprites[i].color.r, allSprites[i].color.g, allSprites[i].color.b, cooldownAlpha);
+			}
+		}
 	}
 
 	public virtual void DestroyEnemy(){
@@ -90,7 +155,12 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 			allCols[i].enabled = false;
 		}
 
-		//DO ANIMATION
+		if(deathAnimator != null){
+			deathAnimator.transform.parent = null;
+			deathAnimator.Play(deathAnimationName);
+		} else{
+			Debug.LogWarning("No death animator found!");
+		}
 
 		EnemyManager.Instance.EnemyIsDestroyed (this);
 	}

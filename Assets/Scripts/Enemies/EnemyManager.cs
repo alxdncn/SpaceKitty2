@@ -35,9 +35,7 @@ public class EnemyManager : MonoBehaviour {
     [SerializeField] int startBurstNumber = 4;
     [SerializeField] int endBurstNumber = 20;
     int burstNumber;
-    
-    [SerializeField] float roundTime = 60f;
-    
+        
     public float maxY;
     public float minY;
     public float maxX;
@@ -47,19 +45,16 @@ public class EnemyManager : MonoBehaviour {
         currentSpawnTime = startSpawnTime;
         currentBurstTime = startBurstTime;
         burstNumber = startBurstNumber;
+		GameStateManager.instance.beatGame += DestroyAllEnemies;
 	}
 
 	// Update is called once per frame
 	void Update () {
-        spawnTimer += GameStateManager.instance.DeltaTime;
-        burstTimer += GameStateManager.instance.DeltaTime;
+        spawnTimer += Time.deltaTime;
+        burstTimer += Time.deltaTime;
                 
-        float roundFraction = GameStateManager.instance.Time / roundTime;
+        float roundFraction = GameStateManager.instance.RoundProgress;
         
-        if(roundFraction > 1){
-			GameStateManager.instance.Pause();
-            return;
-        }
         
         if(spawnTimer > currentSpawnTime){
             SpawnEnemy();
@@ -123,8 +118,8 @@ public class EnemyManager : MonoBehaviour {
 
 	//Call the destroy function on all enemies, which will trigger animation and then call EnemyIsDestroyed on this class
 	public void DestroyAllEnemies(){
-		for (int i = 0; i < allEnemies.Count; i++) {
-			allEnemies [i].DestroyEnemy ();
+		for (int i = 0; i < activeEnemies.Count; i++) {
+			activeEnemies [i].DestroyEnemy ();
 		}
 	}
 

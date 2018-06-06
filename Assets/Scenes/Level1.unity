@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 181854792}
   - component: {fileID: 181854791}
   m_Layer: 5
-  m_Name: Time
+  m_Name: Lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: fedb4596009854cec9b0ae31777c0b83, type: 3}
-    m_FontSize: 12
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0:00:00
+  m_Text: 9
 --- !u!222 &181854792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -365,12 +365,12 @@ MonoBehaviour:
   - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
   - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
   - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  startSpawnTime: 2
-  endSpawnTime: 0.5
+  startSpawnTime: 4
+  endSpawnTime: 2
   startBurstTime: 10
   endBurstTime: 5
-  startBurstNumber: 10
-  endBurstNumber: 20
+  startBurstNumber: 5
+  endBurstNumber: 10
   maxY: 24
   minY: -24
   maxX: 38
@@ -399,6 +399,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2705c986b236047659fe061edaf98340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundTime: 20
+  gameProgressionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0064697
+      value: 1.0110989
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &265564534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +440,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4255992425683262, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 16.2
+      value: 33.67
       objectReference: {fileID: 0}
     - target: {fileID: 4255992425683262, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
       propertyPath: m_LocalPosition.y
@@ -453,22 +472,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1513565455233128, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212271194826936980, guid: 5f25c80491ac84c10932e53e8036bd32,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32,
-        type: 2}
-      propertyPath: cooldownFadeTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32,
-        type: 2}
-      propertyPath: coolDownTime
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
@@ -600,6 +604,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1115056192339882, guid: 970bbd652fe324359bd9e212fda8243e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 970bbd652fe324359bd9e212fda8243e, type: 2}
   m_IsPrefabParent: 0
@@ -670,7 +678,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'SCORE:'
+  m_Text: 'SCORE: 0'
 --- !u!222 &1149224323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -826,6 +834,10 @@ Prefab:
     - target: {fileID: 4985096405571188, guid: 99af484a6bc594a4f9857788c34274c6, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783755639962200, guid: 99af484a6bc594a4f9857788c34274c6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99af484a6bc594a4f9857788c34274c6, type: 2}
