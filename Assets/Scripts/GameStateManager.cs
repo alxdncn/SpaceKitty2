@@ -7,17 +7,22 @@ public class GameStateManager : MonoBehaviour {
 
 	public static GameStateManager instance = null;
 
-	enum State{
+	public enum State{
 		Running,
 		Paused,
 		Ended
 	}
 
-	State currentState = State.Running;
+	public State currentState = State.Running;
 
 	public int Score { get; private set; }
 	float time;
 	[SerializeField] float roundTime = 60f;
+
+	int level = 0;
+
+	[SerializeField] float restartTime = 4;
+	float restartTimer = 0f;
 
 	public float RoundProgress {get; private set;}
 
@@ -25,7 +30,7 @@ public class GameStateManager : MonoBehaviour {
 	public event ScoreChanged onScoreChanged;
 
 	public delegate void GameEnded();
-	public event GameEnded gameEnded;
+	public event GameEnded lostGame;
 
 	public delegate void BeatGame();
 	public event BeatGame beatGame;
@@ -40,28 +45,39 @@ public class GameStateManager : MonoBehaviour {
 		}
 
 		time = 0;
+		restartTimer = 0f;
+		Score = DataBetweenScenes.totalScore;
+
 		RunGame();
+	}
+
+	void Start(){
+		if(onScoreChanged != null){
+			onScoreChanged();
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(currentState + " " + RoundProgress);
-
+		// Debug.Log(currentState + " " + RoundProgress);
 		if(currentState == State.Running){
 			time += UnityEngine.Time.deltaTime;
 			RoundProgress = gameProgressionCurve.Evaluate(time/roundTime);
-			if(RoundProgress >= 1f && beatGame != null){
-				currentState = State.Ended;
-				beatGame();
+			if(RoundProgress >= 1f){
+				WonGame();
 			}
 		} 
 		if(currentState == State.Ended){
-			if(Input.GetKeyDown(KeyCode.N)){
-				SceneManager.LoadScene(1);
+			restartTimer += Time.deltaTime;
+
+			if(restartTimer >= restartTime){
+				restartTimer = 0;
+				SceneManager.LoadScene(level);
 			}
-			if(Input.GetKeyDown(KeyCode.Space)){
-				SceneManager.LoadScene(0);
-			}
+		}
+
+		if(Input.GetKeyDown(KeyCode.T)){
+			Pause();
 		}
 	}
 
@@ -73,15 +89,27 @@ public class GameStateManager : MonoBehaviour {
 	public void Pause(){
 		Debug.Log("Pausing Game");
 		currentState = State.Paused;
-		UnityEngine.Time.timeScale = 0f;
+		// UnityEngine.Time.timeScale = 0f;
 	}
 
-	public void EndGame(){
-		Debug.Log("Ending Game");
+	public void LostGame(){
+		Debug.Log("Lost Game");
 		currentState = State.Ended;
-		UnityEngine.Time.timeScale = 0f;
-		if(gameEnded != null){
-			gameEnded();
+		DataBetweenScenes.totalScore = 0;
+		level = 0;
+		if(lostGame != null){
+			lostGame();
+		}
+	}
+
+	void WonGame(){
+		Debug.Log("Beat Game, Level " + level.ToString());
+		level += 1 % SceneManager.sceneCountInBuildSettings;
+		Debug.Log("Going to Level " + level.ToString());
+		DataBetweenScenes.totalScore = Score;
+		currentState = State.Ended;
+		if(beatGame != null){
+			beatGame();
 		}
 	}
 

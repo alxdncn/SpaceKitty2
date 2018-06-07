@@ -65,8 +65,6 @@ public class Kitty : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D col){
-		Debug.Log(col.gameObject.name);
-
 		if(hit){
 			return;
 		}
@@ -75,14 +73,14 @@ public class Kitty : MonoBehaviour {
 
 		hit = true;
 		coolDownTimer = 0;
-		// lives--;
+		lives--;
 
 		if(kittyHit != null){
 			kittyHit();
 		}
 
 		if(lives <= 0){
-			GameStateManager.instance.EndGame();
+			GameStateManager.instance.LostGame();
 			//Game OVER!
 		}
 	}

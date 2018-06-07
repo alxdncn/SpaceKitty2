@@ -21,6 +21,12 @@ public class EnemyManager : MonoBehaviour {
 	List<EnemyBaseClass> allEnemies = new List<EnemyBaseClass>();
 	List<EnemyBaseClass> activeEnemies = new List<EnemyBaseClass> ();
 	List<EnemyBaseClass> inactiveEnemies = new List<EnemyBaseClass> ();
+
+	List<string> knownEnemyTypes;
+
+	[SerializeField] string[] enemyTypeNames;
+	[SerializeField] Sprite[] enemyTutorialSprites;
+	[SerializeField] string[] enemyTutorialTexts;
     
     [SerializeField] float startSpawnTime = 2f;
     [SerializeField] float endSpawnTime = 0.5f;
@@ -41,34 +47,77 @@ public class EnemyManager : MonoBehaviour {
     public float maxX;
     public float minX;
 
+	bool roundEnded = false;
+
+
+
 	void Awake(){
         currentSpawnTime = startSpawnTime;
         currentBurstTime = startBurstTime;
         burstNumber = startBurstNumber;
+		burstTimer = currentBurstTime; //This is so we start with a burst
 		GameStateManager.instance.beatGame += DestroyAllEnemies;
+
+		if(DataBetweenScenes.allKnownEnemies == null){
+			knownEnemyTypes = new List<string>();
+		} else{
+			knownEnemyTypes = DataBetweenScenes.allKnownEnemies;
+		}
+	}
+
+	void OnEnable(){
+		GameStateManager.instance.beatGame += DestroyAllEnemies;
+	}
+
+	void OnDisable(){
+		GameStateManager.instance.beatGame -= DestroyAllEnemies;
+	}
+
+	void OnDestroy(){
+		DataBetweenScenes.allKnownEnemies = knownEnemyTypes;
 	}
 
 	// Update is called once per frame
 	void Update () {
-        spawnTimer += Time.deltaTime;
-        burstTimer += Time.deltaTime;
-                
-        float roundFraction = GameStateManager.instance.RoundProgress;
+		if(GameStateManager.instance.currentState == GameStateManager.State.Running){
+			spawnTimer += Time.deltaTime;
+			burstTimer += Time.deltaTime;
+					
+			float roundFraction = GameStateManager.instance.RoundProgress;
         
-        
-        if(spawnTimer > currentSpawnTime){
-            SpawnEnemy();
-            spawnTimer = 0;
-            currentSpawnTime = (startSpawnTime * (1 - roundFraction) + endSpawnTime * roundFraction);
-        }
-        if(burstTimer > currentBurstTime){
-            for(int i = 0; i < burstNumber; i++){
-                SpawnEnemy();
-            }
-            burstTimer = 0;
-            currentBurstTime = (startBurstTime * (1 - roundFraction) + endBurstTime * roundFraction);
-            burstNumber = Mathf.RoundToInt(startBurstNumber * (1 - roundFraction) + endBurstNumber * roundFraction);
-        }
+			if(spawnTimer > currentSpawnTime){
+				SpawnEnemy();
+				spawnTimer = 0;
+				currentSpawnTime = (startSpawnTime * (1 - roundFraction) + endSpawnTime * roundFraction);
+			}
+			if(burstTimer > currentBurstTime){
+				for(int i = 0; i < burstNumber; i++){
+					SpawnEnemy();
+				}
+				burstTimer = 0;
+				currentBurstTime = (startBurstTime * (1 - roundFraction) + endBurstTime * roundFraction);
+				burstNumber = Mathf.RoundToInt(startBurstNumber * (1 - roundFraction) + endBurstNumber * roundFraction);
+			}
+		}
+	}
+
+	public void EnemyFirstSeen(string enemyName){
+		knownEnemyTypes.Add(enemyName);
+		string tutorialText = "";
+		Sprite tutorialSprite = null;
+		for(int i = 0; i < enemyTypeNames.Length; i++){
+			if(enemyName.Contains(enemyTypeNames[i])){
+				tutorialText = enemyTutorialTexts[i];
+				tutorialSprite = enemyTutorialSprites[i];
+				break;
+			}
+		}
+		if(tutorialSprite != null){
+			GameUIManager.Instance.SetTutorialText(tutorialText, tutorialSprite);
+			GameStateManager.instance.Pause();
+		} else{
+			Debug.LogError("Enemy type not found! Make sure the enemy name is included on the EnemyManager.");
+		}
 	}
 
 	void ShuffleAndReplenishBag(){
@@ -116,11 +165,19 @@ public class EnemyManager : MonoBehaviour {
 //		newEnemy.Reset (); //probably don't want this, should just use Awake
 	}
 
-	//Call the destroy function on all enemies, which will trigger animation and then call EnemyIsDestroyed on this class
-	public void DestroyAllEnemies(){
-		for (int i = 0; i < activeEnemies.Count; i++) {
+    public List<string> GetKnowEnemyTypes()
+    {
+        return knownEnemyTypes;
+    }
+
+    //Call the destroy function on all enemies, which will trigger animation and then call EnemyIsDestroyed on this class
+    public void DestroyAllEnemies(){
+		Debug.Log("Destroying all enemies");
+		Debug.Log("Active enemies: " + activeEnemies.Count);
+		for (int i = activeEnemies.Count - 1; i >= 0; i--) {
 			activeEnemies [i].DestroyEnemy ();
 		}
+		Debug.Log("Active enemies: " + activeEnemies.Count);
 	}
 
 	//This is a little circuitous, but this will be called at the end of the enemy instance destroy function

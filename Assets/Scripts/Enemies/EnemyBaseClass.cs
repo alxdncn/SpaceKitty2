@@ -78,6 +78,9 @@ public abstract class EnemyBaseClass : MonoBehaviour {
     }
 
 	protected virtual void Update(){
+		if(GameStateManager.instance.currentState != GameStateManager.State.Running)
+			return;
+
 		if(!hit){
 			Move ();
 		}
@@ -94,7 +97,6 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 				}
 				return;
 			}
-
 
 			if(cooldownFadeTimer > cooldownFadeTime){
 				faded = !faded;
@@ -136,6 +138,20 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	protected virtual void Move(){
 		transform.position += -GetVectorToKitty (transform).normalized * movementSpeed * Time.deltaTime;
+		if(!EnemyManager.Instance.GetKnowEnemyTypes().Contains(gameObject.name)){
+			for(int i = 0; i < allSprites.Count; i++){
+				if(allSprites[i].isVisible){
+					ShowTutorialForClass(gameObject.name);
+					break;
+				}
+			}
+		}
+	}
+
+	protected void ShowTutorialForClass(string enemyName){
+		Debug.Log(enemyName);
+
+		EnemyManager.Instance.EnemyFirstSeen(enemyName);
 	}
 
 	protected virtual void HitEnemy(){

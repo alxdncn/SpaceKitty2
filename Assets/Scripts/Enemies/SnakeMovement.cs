@@ -48,6 +48,8 @@ public class SnakeMovement : EnemyBaseClass {
 		myHead = transform.Find ("SnakeHead");
 		allCols = GetComponentsInChildren<BoxCollider2D> ();
 
+		base.Awake ();
+
 		endPosition = transform.position;
 
 		for (int i = 0; i < middleCount; i++) {
@@ -56,7 +58,6 @@ public class SnakeMovement : EnemyBaseClass {
 
 		animator = GetComponent<Animator>();
 
-		base.Awake ();
 	}
 
 	public override void Reset(){
@@ -72,6 +73,9 @@ public class SnakeMovement : EnemyBaseClass {
 	}
 
 	protected override void Update(){
+		if(GameStateManager.instance.currentState != GameStateManager.State.Running)
+			return;
+
 		if(!hit){
 			if (moveTimer > moveTime) {
 				Move ();
@@ -126,6 +130,15 @@ public class SnakeMovement : EnemyBaseClass {
 		}
 		if (moveCount <= 0) {
 			SetMove ();
+		}
+
+		if(!EnemyManager.Instance.GetKnowEnemyTypes().Contains(gameObject.name)){
+			for(int i = 0; i < allSprites.Count; i++){
+				if(allSprites[i].isVisible){
+					ShowTutorialForClass(gameObject.name);
+					break;
+				}
+			}
 		}
 	}
 
