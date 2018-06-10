@@ -71,6 +71,8 @@ public class GameUIManager : MonoBehaviour {
 		tutorialObject.SetActive(true);
 		tutorialText.text = newText;
 		tutorialImage.sprite = newSprite;
+		float xSize = tutorialImage.rectTransform.sizeDelta.y * newSprite.textureRect.width/newSprite.textureRect.height;
+		tutorialImage.rectTransform.sizeDelta = new Vector2(xSize, tutorialImage.rectTransform.sizeDelta.y);
 		tutorialDisplayTimer = tutorialDisplayTime;
 		tutorialActive = true;
 		GameStateManager.instance.Pause();
