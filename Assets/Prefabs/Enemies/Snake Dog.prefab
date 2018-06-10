@@ -382,6 +382,7 @@ MonoBehaviour:
   startHitPoints: 1
   movementSpeed: 0
   deathAnimator: {fileID: 95547769319941308}
+  deathAnimation: {fileID: 7400000, guid: 4a3e5b2b3c3d74204b6b20ddded1a6be, type: 2}
   distanceToMove: 1
   directionRandomRange: 8
   maxMoves: 6

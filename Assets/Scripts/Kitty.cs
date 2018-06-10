@@ -28,6 +28,7 @@ public class Kitty : MonoBehaviour {
 		instance = this;
 		trans = transform;
 		allSprites = GetComponentsInChildren<SpriteRenderer>();
+		lives = DataBetweenScenes.kittyLives;
 	}
 
 	void Update(){
@@ -63,6 +64,10 @@ public class Kitty : MonoBehaviour {
 			coolDownTimer += Time.deltaTime;
 		}
 	}
+
+	void OnDestroy(){
+		DataBetweenScenes.kittyLives = lives;
+	}
 	
 	void OnTriggerEnter2D(Collider2D col){
 		if(hit){
@@ -80,8 +85,8 @@ public class Kitty : MonoBehaviour {
 		}
 
 		if(lives <= 0){
+			lives = 9;
 			GameStateManager.instance.LostGame();
-			//Game OVER!
 		}
 	}
 }

@@ -23,8 +23,8 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	[SerializeField] protected float movementSpeed = 10f;
 
-	[SerializeField] Animator deathAnimator;
-	protected string deathAnimationName = "Die";
+	[SerializeField] protected Animator deathAnimator;
+	[SerializeField] protected AnimationClip deathAnimation;
 	Transform deathAnimatorParent;
 	Vector3 deathAnimatorStartPosition;
 
@@ -54,6 +54,9 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		gameObject.SetActive (true);
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = true;
+		}
+		for(int i = 0; i < allSprites.Count; i++){
+			allSprites[i].enabled = true;
 		}
 		hitPoints = startHitPoints;
 		hit = false;
@@ -138,6 +141,10 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	protected virtual void Move(){
 		transform.position += -GetVectorToKitty (transform).normalized * movementSpeed * Time.deltaTime;
+		CheckIfFirstSeen();
+	}
+
+	protected void CheckIfFirstSeen(){
 		if(!EnemyManager.Instance.GetKnowEnemyTypes().Contains(gameObject.name)){
 			for(int i = 0; i < allSprites.Count; i++){
 				if(allSprites[i].isVisible){
@@ -170,15 +177,26 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = false;
 		}
+		for(int i = 0; i < allSprites.Count; i++){
+			allSprites[i].enabled = false;
+		}
 
+		float animTime = 0f;
 		if(deathAnimator != null){
 			deathAnimator.transform.parent = null;
-			deathAnimator.Play(deathAnimationName);
+			deathAnimator.Play(deathAnimation.name);
+			animTime = deathAnimation.length;
+
 		} else{
 			Debug.LogWarning("No death animator found!");
 		}
 
-		EnemyManager.Instance.EnemyIsDestroyed (this);
+		StartCoroutine(WaitForDeathAnimationToEnd(animTime));
+	}
+
+	protected virtual IEnumerator WaitForDeathAnimationToEnd(float time){
+		yield return new WaitForSeconds(time);
+		EnemyManager.Instance.EnemyIsDestroyed(this);
 	}
 
 	void OnTriggerEnter2D(Collider2D col){

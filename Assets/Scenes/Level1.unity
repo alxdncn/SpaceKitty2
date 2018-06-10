@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -136,7 +137,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 181854789}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: 244.82678, y: 260, z: 0}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 0.9999994, y: 0.9999994, z: 0.9999994}
   m_Children: []
   m_Father: {fileID: 1760971003}
@@ -240,6 +245,11 @@ Prefab:
       propertyPath: m_BackGroundColor.b
       value: 0.08088237
       objectReference: {fileID: 0}
+    - target: {fileID: 114174386962724630, guid: b4a54f28e44d349a197eafe1cea2b1e5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4a54f28e44d349a197eafe1cea2b1e5, type: 2}
   m_IsPrefabParent: 0
@@ -283,12 +293,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7c40b7eae6a254548b4120129f529052, type: 3}
   - {fileID: 21300000, guid: 147160e9e9d1c4d59badfd81a169e2cf, type: 3}
   enemyTutorialTexts:
-  - This doge flies straight for the kitty, but it will explode with only one touch
+  - This doge flies straight for space kitty, but it will explode with only one touch
     of your light.
   - The snake doge meanders willy-nilly, gradually moving to the kitty. It won't stop
     until all it's middle sections are gone.
   - The mother doge is a tough bitch that will take many hits to destroy. Meanwhile,
-    she'll send her pups after you.
+    she'll send her pups after space kitty.
   startSpawnTime: 2
   endSpawnTime: 1
   startBurstTime: 7
@@ -420,7 +430,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4891897936323312, guid: 5047ce2756de44deca0d6d9e4957ece5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 14.1
+      value: 25.41
       objectReference: {fileID: 0}
     - target: {fileID: 4891897936323312, guid: 5047ce2756de44deca0d6d9e4957ece5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -588,6 +598,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 212315995568519614, guid: 5be1ef8dfcd714b61ac2e087e2e68206,
         type: 2}
       propertyPath: m_Sprite
@@ -597,29 +608,64 @@ Prefab:
     - target: {fileID: 212377729422488360, guid: 5be1ef8dfcd714b61ac2e087e2e68206,
         type: 2}
       propertyPath: m_WasSpriteAssigned
+=======
+    - target: {fileID: 1872196967469476, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
+      propertyPath: m_IsActive
+>>>>>>> Stashed changes
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212377729422488360, guid: 5be1ef8dfcd714b61ac2e087e2e68206,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &966851374
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -32.49923
       objectReference: {fileID: 0}
-    - target: {fileID: 212377729422488360, guid: 5be1ef8dfcd714b61ac2e087e2e68206,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 4
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 212377729422488360, guid: 5be1ef8dfcd714b61ac2e087e2e68206,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 4
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217807641257956, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706236322944884, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1872196967469476, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: c84707f1b67c744b1a4f5d92cfc28b76, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &982598520
 Prefab:
@@ -691,7 +737,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1149224320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -244.82678, y: 260, z: 0}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1760971003}
@@ -829,7 +879,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1569183868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1966517038}
@@ -899,7 +949,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1576448793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: 0, y: -110, z: 0}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1569183869}
@@ -1071,8 +1125,13 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1760970999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: 270.5, y: 216.5, z: 0}
   m_LocalScale: {x: 0.7216667, y: 0.7216667, z: 0.7216667}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
   m_Children:
   - {fileID: 1149224321}
   - {fileID: 181854790}
@@ -1174,7 +1233,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1966517037}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: 0, y: 110, z: 0}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1569183869}
