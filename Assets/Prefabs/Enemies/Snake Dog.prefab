@@ -383,11 +383,12 @@ MonoBehaviour:
   movementSpeed: 0
   deathAnimator: {fileID: 95547769319941308}
   deathAnimation: {fileID: 7400000, guid: 4a3e5b2b3c3d74204b6b20ddded1a6be, type: 2}
-  distanceToMove: 1
+  distanceToMove: 2.7
   directionRandomRange: 8
   maxMoves: 6
   minMoves: 2
-  moveTime: 0.15
+  middleCount: 4
+  moveTime: 0.5
   childExplosion: {fileID: 4827524055341536}
 --- !u!114 &114613920385500304
 MonoBehaviour:

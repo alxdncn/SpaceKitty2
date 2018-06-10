@@ -21,7 +21,7 @@ public class SnakeMovement : EnemyBaseClass {
 	List<GameObject> middles = new List<GameObject>();
 	List<GameObject> inactiveMiddles = new List<GameObject>();
 
-	int middleCount = 6;
+	[SerializeField] int middleCount = 4;
 
 	[SerializeField] float moveTime = 0.3f;
 	float moveTimer = 0f;
@@ -48,13 +48,13 @@ public class SnakeMovement : EnemyBaseClass {
 		myHead = transform.Find ("SnakeHead");
 		allCols = GetComponentsInChildren<BoxCollider2D> ();
 
-		endPosition = transform.position;
-
 		for (int i = 0; i < middleCount; i++) {
 			CreateSnakeMiddle (endPosition, true);
 		}
 
 		base.Awake ();
+
+		endPosition = transform.position;
 
 		animator = GetComponent<Animator>();
 
