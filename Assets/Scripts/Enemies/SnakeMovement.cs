@@ -48,13 +48,13 @@ public class SnakeMovement : EnemyBaseClass {
 		myHead = transform.Find ("SnakeHead");
 		allCols = GetComponentsInChildren<BoxCollider2D> ();
 
+		base.Awake ();
+
 		endPosition = transform.position;
 
 		for (int i = 0; i < middleCount; i++) {
 			CreateSnakeMiddle (endPosition, true);
 		}
-
-		base.Awake ();
 
 		animator = GetComponent<Animator>();
 
@@ -220,14 +220,13 @@ public class SnakeMovement : EnemyBaseClass {
 		if (init) {
 			GameObject newMiddle = Instantiate ((Resources.Load ("SnakeMiddle")) as GameObject);
 			newMiddle.transform.parent = this.transform;
-			newMiddle.transform.localPosition = Vector3.zero;
+			newMiddle.transform.localPosition = new Vector3 (0f, 0f, 0f);
 
 			middles.Add (newMiddle);
 		} else {
 			GameObject newMiddle = inactiveMiddles [0];
 			inactiveMiddles.RemoveAt (0);
 			middles.Add (newMiddle);
-			newMiddle.transform.localPosition = Vector3.zero;
 			newMiddle.SetActive (true);
 		}
 	}

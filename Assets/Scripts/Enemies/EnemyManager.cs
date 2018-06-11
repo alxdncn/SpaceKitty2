@@ -172,9 +172,12 @@ public class EnemyManager : MonoBehaviour {
 
     //Call the destroy function on all enemies, which will trigger animation and then call EnemyIsDestroyed on this class
     public void DestroyAllEnemies(){
+		Debug.Log("Destroying all enemies");
+		Debug.Log("Active enemies: " + activeEnemies.Count);
 		for (int i = activeEnemies.Count - 1; i >= 0; i--) {
 			activeEnemies [i].DestroyEnemy ();
 		}
+		Debug.Log("Active enemies: " + activeEnemies.Count);
 	}
 
 	//This is a little circuitous, but this will be called at the end of the enemy instance destroy function
