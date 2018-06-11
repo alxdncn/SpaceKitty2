@@ -55,8 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4350164397413848}
   - component: {fileID: 212393776092409656}
+  - component: {fileID: 114419767641409144}
   - component: {fileID: 95982860249117444}
-  - component: {fileID: 114343729836450554}
   m_Layer: 0
   m_Name: DogeBody
   m_TagString: Untagged
@@ -184,7 +184,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114343729836450554
+--- !u!114 &114419767641409144
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_States: []
-  m_File: {fileID: 11400000, guid: a8223f1e2f8b54d41befd160e5b3248c, type: 2}
+  m_File: {fileID: 11400000, guid: a3b62a380aeab4e6e9c7a57d19390092, type: 2}
   speed: 1
   m_Settings:
     randomizeOnStart: 1
