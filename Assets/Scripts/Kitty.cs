@@ -78,7 +78,7 @@ public class Kitty : MonoBehaviour {
 
 		hit = true;
 		coolDownTimer = 0;
-		lives--;
+		// lives--;
 
 		if(kittyHit != null){
 			kittyHit();

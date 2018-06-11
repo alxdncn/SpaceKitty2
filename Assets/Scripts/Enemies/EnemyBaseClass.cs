@@ -81,7 +81,8 @@ public abstract class EnemyBaseClass : MonoBehaviour {
     }
 
 	protected virtual void Update(){
-		if(GameStateManager.instance.currentState != GameStateManager.State.Running)
+		if(GameStateManager.instance.currentState == GameStateManager.State.Paused || 
+		GameStateManager.instance.currentState == GameStateManager.State.Ended)
 			return;
 
 		if(!hit){
@@ -156,8 +157,6 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	}
 
 	protected void ShowTutorialForClass(string enemyName){
-		Debug.Log(enemyName);
-
 		EnemyManager.Instance.EnemyFirstSeen(enemyName);
 	}
 
@@ -200,7 +199,9 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.gameObject.tag == "PixelColliders" && !hit) {
+		if (col.gameObject.tag == "PixelColliders" && !hit && 
+		(GameStateManager.instance.currentState == GameStateManager.State.Running || 
+		GameStateManager.instance.currentState == GameStateManager.State.TimesUp)) {
 			HitEnemy ();
 			if (hitPoints <= 0) {
 				GameStateManager.instance.ChangeScore();

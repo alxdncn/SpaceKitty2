@@ -29,6 +29,9 @@ public class SnakeMovement : EnemyBaseClass {
 	Animator animator;
 	[SerializeField] Transform childExplosion;
 
+	[SerializeField] float xEdgeBuffer = 6f;
+	[SerializeField] float yEdgeBuffer = 4f;
+
 //	[SerializeField] new float coolDownTime;
 
 	enum Directions {
@@ -41,7 +44,7 @@ public class SnakeMovement : EnemyBaseClass {
 	Directions direction;
 
 	protected override void Awake(){
-		startHitPoints = middleCount;
+		startHitPoints = middleCount + 1;
 		hitPoints = startHitPoints;
 
 		myButt = transform.Find ("SnakeButt");
@@ -73,7 +76,8 @@ public class SnakeMovement : EnemyBaseClass {
 	}
 
 	protected override void Update(){
-		if(GameStateManager.instance.currentState != GameStateManager.State.Running)
+		if(GameStateManager.instance.currentState == GameStateManager.State.Paused || 
+		GameStateManager.instance.currentState == GameStateManager.State.Ended)
 			return;
 
 		if(!hit){
@@ -152,6 +156,25 @@ public class SnakeMovement : EnemyBaseClass {
 	}
 
 	void SetMove(){
+		//If any of these are true, we're too far away and need to move towards the kitty
+		if(myHead.position.x <= EnemyManager.Instance.minX + xEdgeBuffer){
+			direction = Directions.Right;
+			Debug.Log("Heyo going right");
+			return;
+		} else if(myHead.position.x >= EnemyManager.Instance.maxX - xEdgeBuffer){
+			direction = Directions.Left;
+			Debug.Log("Heyo going left");
+			return;
+		} else if(myHead.position.y >= EnemyManager.Instance.maxY - yEdgeBuffer){
+			direction = Directions.Down;
+			Debug.Log("Heyo going down");
+			return;
+		} else if(myHead.position.y <= EnemyManager.Instance.minY + yEdgeBuffer){
+			direction = Directions.Up;
+			Debug.Log("Heyo going up");
+			return;
+		}
+
 		moveCount = Random.Range (minMoves, maxMoves);
 		dirNum = Random.Range (0, directionRandomRange);
 
@@ -235,15 +258,19 @@ public class SnakeMovement : EnemyBaseClass {
 	protected override void HitEnemy ()
 	{
 		base.HitEnemy ();
-		GameObject killMiddle = middles [middles.Count - 1];
+		if(middles.Count > 0){
+			GameObject killMiddle = middles [middles.Count - 1];
 
-		childExplosion.transform.parent = null;
-		childExplosion.transform.position = killMiddle.transform.position;
-		animator.Play("SnakeMiddleExplode");
+			childExplosion.transform.parent = null;
+			childExplosion.transform.position = killMiddle.transform.position;
+			animator.Play("SnakeMiddleExplode");
 
-		inactiveMiddles.Add (killMiddle);
-		middles.Remove (killMiddle);
-		killMiddle.SetActive (false);
+			inactiveMiddles.Add (killMiddle);
+			middles.Remove (killMiddle);
+			myButt.localPosition = killMiddle.transform.localPosition;
+			myButt.localEulerAngles = killMiddle.transform.localEulerAngles;
+			killMiddle.SetActive (false);
+		}
 	}
 
 	public override void DestroyEnemy(){
