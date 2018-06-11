@@ -20,33 +20,21 @@ public class GameUIManager : MonoBehaviour {
 	[SerializeField] Text timeText;
 
 	[SerializeField] GameObject tutorialObject;
-	Text tutorialText;
-	Image tutorialImage;
+	[SerializeField] Text tutorialText;
+	[SerializeField] Image tutorialImage;
 
 	bool tutorialActive = false;
 
 	[SerializeField] float tutorialDisplayTime;
 	float tutorialDisplayTimer;
 
-	Text levelText;
-
-	bool showLevel = true;
-	
-	[SerializeField] float showLevelTime = 1f;
-	float showLevelTimer = 0;
-
 	void Awake(){
 		Instance = this;
-		tutorialText = tutorialObject.GetComponentInChildren<Text>();
-		tutorialImage = tutorialObject.transform.GetChild(1).GetComponent<Image>();
 		tutorialObject.SetActive(false);
-		levelText = tutorialObject.transform.parent.Find("LevelText").GetComponent<Text>();
-		levelText.text = "Level " + DataBetweenScenes.level;
 	}
 	// Use this for initialization
 	void Start () {
 		OnKittyHit();
-		GameStateManager.instance.Pause();
 	}
 
 	void OnEnable(){
@@ -60,14 +48,6 @@ public class GameUIManager : MonoBehaviour {
 	}
 
 	void Update(){
-		if(showLevel){
-			if(showLevelTimer > showLevelTime){
-				levelText.text = "";
-				showLevel = false;
-				GameStateManager.instance.RunGame();
-			}
-			showLevelTimer += Time.deltaTime;
-		}
 		if(tutorialActive){
 			if(tutorialDisplayTimer <= 0){
 				tutorialActive = false;

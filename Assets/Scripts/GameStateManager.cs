@@ -10,7 +10,6 @@ public class GameStateManager : MonoBehaviour {
 	public enum State{
 		Running,
 		Paused,
-		TimesUp,
 		Ended
 	}
 
@@ -47,7 +46,6 @@ public class GameStateManager : MonoBehaviour {
 
 		time = 0;
 		restartTimer = 0f;
-		level = SceneManager.GetActiveScene().buildIndex;
 		Score = DataBetweenScenes.totalScore;
 
 		RunGame();
@@ -66,7 +64,7 @@ public class GameStateManager : MonoBehaviour {
 			time += UnityEngine.Time.deltaTime;
 			RoundProgress = gameProgressionCurve.Evaluate(time/roundTime);
 			if(RoundProgress >= 1f){
-				currentState = State.TimesUp;
+				WonGame();
 			}
 		} 
 		if(currentState == State.Ended){
@@ -89,26 +87,26 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	public void Pause(){
+		Debug.Log("Pausing Game");
 		currentState = State.Paused;
 		// UnityEngine.Time.timeScale = 0f;
 	}
 
 	public void LostGame(){
+		Debug.Log("Lost Game");
 		currentState = State.Ended;
 		DataBetweenScenes.totalScore = 0;
 		level = 0;
-		DataBetweenScenes.level = 1;
 		if(lostGame != null){
 			lostGame();
 		}
 	}
 
-	public void WonGame(){
+	void WonGame(){
 		Debug.Log("Beat Game, Level " + level.ToString());
-		level = Mathf.Clamp(level + 1, 0, SceneManager.sceneCountInBuildSettings - 1);		
+		level += 1 % SceneManager.sceneCountInBuildSettings;
 		Debug.Log("Going to Level " + level.ToString());
 		DataBetweenScenes.totalScore = Score;
-		DataBetweenScenes.level++;
 		currentState = State.Ended;
 		if(beatGame != null){
 			beatGame();

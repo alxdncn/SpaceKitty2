@@ -150,14 +150,14 @@ MonoBehaviour:
   coolDownTime: 1
   cooldownFadeTime: 0.1
   cooldownAlpha: 0.5
-  startHitPoints: 7
+  startHitPoints: 10
   movementSpeed: 1
   deathAnimator: {fileID: 95028881694643958}
   deathAnimation: {fileID: 7400000, guid: 4a3e5b2b3c3d74204b6b20ddded1a6be, type: 2}
   sineMagnitude: 5
   puppyPrefab: {fileID: 1706236322944884, guid: c84707f1b67c744b1a4f5d92cfc28b76,
     type: 2}
-  puppySpawnTime: 1
+  puppySpawnTime: 1.5
   waitToSpawnPupsTime: 5
 --- !u!212 &212235711913483188
 SpriteRenderer:
