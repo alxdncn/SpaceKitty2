@@ -23,13 +23,14 @@ GameObject:
   - component: {fileID: 61893780282763718}
   - component: {fileID: 50008824277973066}
   - component: {fileID: 114748991210093006}
+  - component: {fileID: 114754957379770060}
   m_Layer: 0
   m_Name: Mothership
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1536145462039112
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1204253689577378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.5, y: 25.41, z: 0}
+  m_LocalPosition: {x: -8.5, y: 14.1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4300101605294902}
@@ -106,18 +107,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.066794395, y: 0.066794395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.555, y: 4.25}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 2.555, y: 4.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.555, y: 4.25}
+  m_Size: {x: 1.673316, y: 3.1545734}
   m_EdgeRadius: 0
 --- !u!95 &95028881694643958
 Animator:
@@ -159,6 +160,31 @@ MonoBehaviour:
     type: 2}
   puppySpawnTime: 1.5
   waitToSpawnPupsTime: 5
+--- !u!114 &114754957379770060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204253689577378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 492295970, guid: ab85ac808950aa04ea8320fc273cd8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_States: []
+  m_File: {fileID: 11400000, guid: a87c4fc932a6f4c27898e84262a4ea17, type: 2}
+  speed: 1
+  m_Settings:
+    randomizeOnStart: 1
+    playOnStart: 1
+    overrideFileSettings: 0
+    customPlaybackMode: 1
+    customFramesPerSecond: 8
+    customBorder: {x: 0, y: 0, z: 0, w: 0}
+    customPixelsPerUnit: 100
+    customFilterMode: 2
+    wrapMode: 1
+    startFrame: 0
 --- !u!212 &212235711913483188
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -193,7 +219,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 147160e9e9d1c4d59badfd81a169e2cf, type: 3}
+  m_Sprite: {fileID: 213522944793179126, guid: a87c4fc932a6f4c27898e84262a4ea17, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
