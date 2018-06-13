@@ -49,14 +49,14 @@ public class EnemyManager : MonoBehaviour {
 
 	bool roundEnded = false;
 
-
+	public bool allEnemiesDead = false;
 
 	void Awake(){
         currentSpawnTime = startSpawnTime;
         currentBurstTime = startBurstTime;
         burstNumber = startBurstNumber;
 		burstTimer = currentBurstTime; //This is so we start with a burst
-		GameStateManager.instance.beatGame += DestroyAllEnemies;
+		// GameStateManager.instance.beatGame += DestroyAllEnemies;
 
 		if(DataBetweenScenes.allKnownEnemies == null){
 			knownEnemyTypes = new List<string>();
@@ -65,13 +65,13 @@ public class EnemyManager : MonoBehaviour {
 		}
 	}
 
-	void OnEnable(){
-		GameStateManager.instance.beatGame += DestroyAllEnemies;
-	}
+	// void OnEnable(){
+	// 	GameStateManager.instance.beatGame += DestroyAllEnemies;
+	// }
 
-	void OnDisable(){
-		GameStateManager.instance.beatGame -= DestroyAllEnemies;
-	}
+	// void OnDisable(){
+	// 	GameStateManager.instance.beatGame -= DestroyAllEnemies;
+	// }
 
 	void OnDestroy(){
 		DataBetweenScenes.allKnownEnemies = knownEnemyTypes;
@@ -98,6 +98,9 @@ public class EnemyManager : MonoBehaviour {
 				currentBurstTime = (startBurstTime * (1 - roundFraction) + endBurstTime * roundFraction);
 				burstNumber = Mathf.RoundToInt(startBurstNumber * (1 - roundFraction) + endBurstNumber * roundFraction);
 			}
+		} else if(GameStateManager.instance.currentState == GameStateManager.State.TimesUp && activeEnemies.Count <= 0 && !allEnemiesDead){
+			allEnemiesDead = true;
+			GameStateManager.instance.WonGame();
 		}
 	}
 
@@ -172,12 +175,9 @@ public class EnemyManager : MonoBehaviour {
 
     //Call the destroy function on all enemies, which will trigger animation and then call EnemyIsDestroyed on this class
     public void DestroyAllEnemies(){
-		Debug.Log("Destroying all enemies");
-		Debug.Log("Active enemies: " + activeEnemies.Count);
 		for (int i = activeEnemies.Count - 1; i >= 0; i--) {
 			activeEnemies [i].DestroyEnemy ();
 		}
-		Debug.Log("Active enemies: " + activeEnemies.Count);
 	}
 
 	//This is a little circuitous, but this will be called at the end of the enemy instance destroy function

@@ -29,6 +29,11 @@
 				float4 vertex : SV_POSITION;
 			};
 
+			sampler2D _MainTex;
+			uniform sampler2D _WebCamTex;
+			uniform float _SaturationThreshold;
+			uniform fixed4 _RenderColor;
+
 			v2f vert (appdata v)
 			{
 				v2f o;
@@ -36,11 +41,6 @@
 				o.uv = v.uv;
 				return o;
 			}
-			
-			sampler2D _MainTex;
-			uniform sampler2D _WebCamTex;
-			uniform float _SaturationThreshold;
-			uniform fixed4 _RenderColor;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
@@ -51,7 +51,7 @@
 
 				float saturation = min((webCamCol.r + webCamCol.g + webCamCol.b) / 3, 1);
 
-				//pink is 1, blue is 0
+				// red is 1, black is 0
 				float webCamAdjuster = clamp(ceil(saturation - _SaturationThreshold), 0, 1);
 
 				col = col * (1 - webCamAdjuster) + _RenderColor * (webCamAdjuster);

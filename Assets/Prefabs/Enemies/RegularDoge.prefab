@@ -199,8 +199,9 @@ MonoBehaviour:
   cooldownFadeTime: 0.5
   cooldownAlpha: 0.5
   startHitPoints: 1
-  movementSpeed: 5
+  movementSpeed: 3
   deathAnimator: {fileID: 95658189807425738}
+  deathAnimation: {fileID: 7400000, guid: 4a3e5b2b3c3d74204b6b20ddded1a6be, type: 2}
 --- !u!114 &114979742244698670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -309,7 +310,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5, y: 2.31}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

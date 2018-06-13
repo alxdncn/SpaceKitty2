@@ -31,13 +31,6 @@ public class ReadLightPixels : MonoBehaviour {
 	}
 
 	void Update(){
-		// if (waitTimer > 0) {
-		// 	waitTimer -= Time.deltaTime;
-		// 	return;
-		// } else if(!startedWebcam){
-		// 	startedWebcam = true;
-		// 	GameStateManager.instance.RunGame();
-		// }
 
 		int numLightPixels = Mathf.Max(webCamScript.brightPixelPositions.Count, colliderPool.Count);
 
@@ -47,7 +40,8 @@ public class ReadLightPixels : MonoBehaviour {
 
 		for (int i = 0; i < numLightPixels; i++) {
 			if (i >= webCamScript.brightPixelPositions.Count) {
-				colliderPool [i].SetActive (false);
+				if(colliderPool[i].activeSelf)
+					colliderPool [i].SetActive (false);
 				continue;
 			}
 
