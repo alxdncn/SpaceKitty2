@@ -28,6 +28,13 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	Transform deathAnimatorParent;
 	Vector3 deathAnimatorStartPosition;
 
+	float playPoint = 3f;
+	AudioSource audioSource;
+	[SerializeField] protected AudioClip[] explodeSound;
+	[SerializeField] protected AudioClip[] borkSound;
+
+	AudioClip[] laserzSounds;
+
 	protected virtual void Awake(){
 		hitPoints = startHitPoints;
         transform.position = GetPosition(EnemyManager.Instance.minX, EnemyManager.Instance.maxX, EnemyManager.Instance.minY, EnemyManager.Instance.maxY);
@@ -47,6 +54,12 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 				allSprites.Add(spriteArray[i]);
 			}
 		}
+
+		playPoint = Random.Range (3f, 10f);
+		audioSource = GetComponent<AudioSource> ();
+		laserzSounds = new AudioClip[2];
+		laserzSounds [0] = Resources.Load ("Laser1") as AudioClip;
+		laserzSounds [1] = Resources.Load ("Laser2") as AudioClip;
 	}
 
 	public virtual void Reset(){
@@ -89,6 +102,30 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 			Move ();
 		}
 		HandleCooldown();
+		playPoint -= 0.1f;
+		if (playPoint <= 0) {
+			PlayBork ();
+		}
+	}
+
+	void PlayBork(){
+		int bark = Random.Range (0, borkSound.Length);
+		audioSource.clip = borkSound [bark];
+		audioSource.Play();
+		playPoint = Random.Range (3f, 10f);
+	}
+
+	void PlayLazor(){
+		int lazor = Random.Range (0, laserzSounds.Length);
+		audioSource.clip = laserzSounds [lazor];
+		audioSource.Play ();
+		Invoke ("PlayBoom", laserzSounds [lazor].length);
+	}
+
+	void PlayBoom(){
+		int boom = Random.Range (0, explodeSound.Length);
+		audioSource.clip = explodeSound [boom];
+		audioSource.Play ();
 	}
 
 	protected void HandleCooldown(){
@@ -173,6 +210,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	}
 
 	public virtual void DestroyEnemy(){
+		PlayLazor ();
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = false;
 		}

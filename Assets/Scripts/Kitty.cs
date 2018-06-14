@@ -23,11 +23,17 @@ public class Kitty : MonoBehaviour {
 	public delegate void KittyHit();
 	public KittyHit kittyHit;
 
+	//for audio
+	AudioSource mySource;
+	public AudioClip[] hurtMeows;
+	public AudioClip[] finalMeow;
+
 	// Use this for initialization
 	void Awake () {
 		instance = this;
 		trans = transform;
 		allSprites = GetComponentsInChildren<SpriteRenderer>();
+		mySource = GetComponent<AudioSource> ();
 		lives = DataBetweenScenes.kittyLives;
 	}
 
@@ -81,12 +87,26 @@ public class Kitty : MonoBehaviour {
 		lives--;
 
 		if(kittyHit != null){
+			PlayHurtMew ();
 			kittyHit();
 		}
 
 		if(lives <= 0){
 			lives = 9;
+			PlayDeadMew ();
 			GameStateManager.instance.LostGame();
 		}
+	}
+
+	void PlayDeadMew(){
+		int randMew = Random.Range (0, finalMeow.Length);
+		mySource.clip = finalMeow [randMew];
+		mySource.Play ();
+	}
+
+	void PlayHurtMew(){
+		int randMew = Random.Range (0, hurtMeows.Length);
+		mySource.clip = hurtMeows [randMew];
+		mySource.Play ();
 	}
 }

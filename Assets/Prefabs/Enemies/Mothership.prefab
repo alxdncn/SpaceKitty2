@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50008824277973066}
   - component: {fileID: 114748991210093006}
   - component: {fileID: 114754957379770060}
+  - component: {fileID: 82359858850189696}
   m_Layer: 0
   m_Name: Mothership
   m_TagString: Untagged
@@ -120,6 +121,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.673316, y: 3.1545734}
   m_EdgeRadius: 0
+--- !u!82 &82359858850189696
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204253689577378}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95028881694643958
 Animator:
   serializedVersion: 3
@@ -155,6 +236,17 @@ MonoBehaviour:
   movementSpeed: 1
   deathAnimator: {fileID: 95028881694643958}
   deathAnimation: {fileID: 7400000, guid: 4a3e5b2b3c3d74204b6b20ddded1a6be, type: 2}
+  explodeSound:
+  - {fileID: 8300000, guid: 28a3993289d604585abbf4be39a5f333, type: 3}
+  - {fileID: 8300000, guid: aa9e908e876104c4e9cd7e8a42b98066, type: 3}
+  - {fileID: 8300000, guid: 6d3c57046948743758a6fe78364c3858, type: 3}
+  - {fileID: 8300000, guid: 743e95ee6ddd74ac98c76873c07bc536, type: 3}
+  borkSound:
+  - {fileID: 8300000, guid: 0cf9f28f2962f40b0b22d27656af873d, type: 3}
+  - {fileID: 8300000, guid: ed1aa94fcec8f4c61a607d98c1c4875b, type: 3}
+  laserzSounds:
+  - {fileID: 8300000, guid: 724e19e4d4e484434a7c6a26b4e4c8e0, type: 3}
+  - {fileID: 8300000, guid: d0ab8269cd8df4e67abbe4cb284bdd63, type: 3}
   sineMagnitude: 5
   puppyPrefab: {fileID: 1706236322944884, guid: c84707f1b67c744b1a4f5d92cfc28b76,
     type: 2}

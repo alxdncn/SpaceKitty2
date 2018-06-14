@@ -72,10 +72,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4255992425683262}
   - component: {fileID: 114293904182156136}
-  - component: {fileID: 114023990699599592}
-  - component: {fileID: 82500890475250052}
   - component: {fileID: 50468296822138508}
   - component: {fileID: 95216849743302348}
+  - component: {fileID: 82981128570858496}
   m_Layer: 0
   m_Name: Snake Dog
   m_TagString: Untagged
@@ -268,16 +267,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8427391, y: 2.0666666}
   m_EdgeRadius: 0
---- !u!82 &82500890475250052
+--- !u!82 &82981128570858496
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1513565455233128}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 26d4d4229d06e4ac18e11cbf1eeb49dc, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -335,7 +334,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -382,18 +381,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114023990699599592
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1513565455233128}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93164fdf8fb854efdbb0181283da5986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bark: {fileID: 8300000, guid: 26d4d4229d06e4ac18e11cbf1eeb49dc, type: 3}
 --- !u!114 &114293904182156136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,6 +399,14 @@ MonoBehaviour:
   movementSpeed: 0
   deathAnimator: {fileID: 95547769319941308}
   deathAnimation: {fileID: 7400000, guid: 4a3e5b2b3c3d74204b6b20ddded1a6be, type: 2}
+  explodeSound:
+  - {fileID: 8300000, guid: 28a3993289d604585abbf4be39a5f333, type: 3}
+  - {fileID: 8300000, guid: aa9e908e876104c4e9cd7e8a42b98066, type: 3}
+  - {fileID: 8300000, guid: 6d3c57046948743758a6fe78364c3858, type: 3}
+  - {fileID: 8300000, guid: 743e95ee6ddd74ac98c76873c07bc536, type: 3}
+  borkSound:
+  - {fileID: 8300000, guid: 26d4d4229d06e4ac18e11cbf1eeb49dc, type: 3}
+  - {fileID: 8300000, guid: 507873b0609494c4b98c35a437041bf3, type: 3}
   distanceToMove: 2.8
   directionRandomRange: 8
   maxMoves: 6

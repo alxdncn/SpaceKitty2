@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114687277294578510}
   - component: {fileID: 58714127312434474}
   - component: {fileID: 50072846405402466}
+  - component: {fileID: 82391813276256646}
   m_Layer: 9
   m_Name: Kittybod
   m_TagString: Kitty
@@ -139,6 +140,86 @@ CircleCollider2D:
   m_Offset: {x: -0.14918804, y: 5.9514046}
   serializedVersion: 2
   m_Radius: 10.58891
+--- !u!82 &82391813276256646
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1075871590833032}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114687277294578510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +236,11 @@ MonoBehaviour:
   lives: 9
   cooldownFadeTime: 0.1
   cooldownAlpha: 0.5
+  hurtMeows:
+  - {fileID: 8300000, guid: 462d78a4a8a28415f88d63036dbf100c, type: 3}
+  - {fileID: 8300000, guid: f3e8161efd524449ba39a04e48fd70ad, type: 3}
+  finalMeow:
+  - {fileID: 8300000, guid: ac019816aa181449d9aecf15f35c859d, type: 3}
 --- !u!114 &114932387548317548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,7 +325,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 213352477985800898, guid: a4bb78ec2e21a41a5abe388f1c714a05, type: 2}
+  m_Sprite: {fileID: 213478615096727902, guid: a4bb78ec2e21a41a5abe388f1c714a05, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -283,7 +369,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 213518555877343078, guid: 9ba943a6671b341faafab70c8f28f528, type: 2}
+  m_Sprite: {fileID: 213606095011035956, guid: 9ba943a6671b341faafab70c8f28f528, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
