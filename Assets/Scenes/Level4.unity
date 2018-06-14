@@ -219,6 +219,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 71610588}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &71610590 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1862596220577876, guid: ea567535b8466472a95215c5e2af6201,
+    type: 2}
+  m_PrefabInternal: {fileID: 71610588}
 --- !u!1001 &223116505
 Prefab:
   m_ObjectHideFlags: 0
@@ -396,6 +401,23 @@ Prefab:
       propertyPath: levelText
       value: 
       objectReference: {fileID: 71610589}
+    - target: {fileID: 114989089904310734, guid: 032f8ccc26ad04b0f86c1f44c365e5d6,
+        type: 2}
+      propertyPath: enemyTutorialTexts.Array.data[2]
+      value: This doge is a tough mother that will take many hits to destroy. Meanwhile,
+        she'll send her pups after you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989089904310734, guid: 032f8ccc26ad04b0f86c1f44c365e5d6,
+        type: 2}
+      propertyPath: enemyTutorialTexts.Array.data[1]
+      value: The snake doge meanders willy-nilly, gradually moving to the kitty. It
+        won't stop until all it's midsections are gone.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971502944865330, guid: 032f8ccc26ad04b0f86c1f44c365e5d6,
+        type: 2}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 71610590}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 032f8ccc26ad04b0f86c1f44c365e5d6, type: 2}
   m_IsPrefabParent: 0

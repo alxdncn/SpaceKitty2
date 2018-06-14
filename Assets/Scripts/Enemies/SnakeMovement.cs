@@ -68,6 +68,7 @@ public class SnakeMovement : EnemyBaseClass {
 			inactiveMiddles[i].transform.position = Vector2.one * 1000f;
 		}
 		myButt.transform.position = Vector2.one * 10000f;
+		myHead.transform.position = Vector2.one * 10000f;
 		//TODO: make sure the sprites for the middle and the back aren't being enabled until after their positions are set
 		//Right now this is pretty ugly
 

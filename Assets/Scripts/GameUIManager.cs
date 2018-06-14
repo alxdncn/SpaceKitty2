@@ -22,6 +22,8 @@ public class GameUIManager : MonoBehaviour {
 	[SerializeField] GameObject tutorialObject;
 
 	[SerializeField] Text levelText;
+
+	[SerializeField] GameObject gameOverText;
 	Text tutorialText;
 	Image tutorialImage;
 
@@ -36,6 +38,7 @@ public class GameUIManager : MonoBehaviour {
 		tutorialImage = tutorialObject.transform.GetChild(1).GetComponent<Image>();
 		tutorialObject.SetActive(false);
 		levelText.text = "Level " + DataBetweenScenes.level;
+		gameOverText.SetActive(false);
 	}
 	// Use this for initialization
 	void Start () {
@@ -45,11 +48,13 @@ public class GameUIManager : MonoBehaviour {
 
 	void OnEnable(){
 		GameStateManager.instance.onScoreChanged += OnScoreChanged;
+		GameStateManager.instance.lostGame += ShowGameOver;
 		Kitty.instance.kittyHit += OnKittyHit;
 	}
 
 	void OnDisable(){
 		GameStateManager.instance.onScoreChanged -= OnScoreChanged;
+		GameStateManager.instance.lostGame -= ShowGameOver;
 		Kitty.instance.kittyHit -= OnKittyHit;
 	}
 
@@ -77,11 +82,16 @@ public class GameUIManager : MonoBehaviour {
 		scoreText.text = "SCORE: " + GameStateManager.instance.Score;
 	}
 
+	void ShowGameOver(){
+		gameOverText.SetActive(true);
+	}
+
 	public void SetTutorialText(string newText, Sprite newSprite){
 		tutorialObject.SetActive(true);
 		tutorialText.text = newText;
 		tutorialImage.sprite = newSprite;
-		float xSize = tutorialImage.rectTransform.sizeDelta.y * newSprite.textureRect.width/newSprite.textureRect.height;
+		float xSize = tutorialImage.rectTransform.sizeDelta.y * newSprite.texture.width/newSprite.texture.height;
+		Debug.Log(newSprite.texture.width + "   " + newSprite.texture.height);
 		tutorialImage.rectTransform.sizeDelta = new Vector2(xSize, tutorialImage.rectTransform.sizeDelta.y);
 		tutorialDisplayTimer = tutorialDisplayTime;
 		tutorialActive = true;

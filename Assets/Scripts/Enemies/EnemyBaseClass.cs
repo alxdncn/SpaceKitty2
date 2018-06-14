@@ -102,7 +102,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 			Move ();
 		}
 		HandleCooldown();
-		playPoint -= 0.1f;
+		playPoint -= Time.deltaTime;
 		if (playPoint <= 0) {
 			PlayBork ();
 		}
@@ -110,16 +110,18 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	void PlayBork(){
 		int bark = Random.Range (0, borkSound.Length);
+		audioSource.volume = 0.2f;
 		audioSource.clip = borkSound [bark];
 		audioSource.Play();
-		playPoint = Random.Range (3f, 10f);
+		playPoint = Random.Range (7f, 10f);
 	}
 
 	void PlayLazor(){
 		int lazor = Random.Range (0, laserzSounds.Length);
+		audioSource.volume = 0.8f;
 		audioSource.clip = laserzSounds [lazor];
 		audioSource.Play ();
-		Invoke ("PlayBoom", laserzSounds [lazor].length);
+		Invoke ("PlayBoom", 0.2f);
 	}
 
 	void PlayBoom(){
@@ -210,7 +212,6 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	}
 
 	public virtual void DestroyEnemy(){
-		PlayLazor ();
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = false;
 		}
@@ -241,6 +242,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		(GameStateManager.instance.currentState == GameStateManager.State.Running || 
 		GameStateManager.instance.currentState == GameStateManager.State.TimesUp)) {
 			HitEnemy ();
+			PlayLazor ();
 			if (hitPoints <= 0) {
 				GameStateManager.instance.ChangeScore();
 				DestroyEnemy ();

@@ -218,7 +218,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -287,7 +287,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 28a3993289d604585abbf4be39a5f333, type: 3}
   - {fileID: 8300000, guid: aa9e908e876104c4e9cd7e8a42b98066, type: 3}
   - {fileID: 8300000, guid: 6d3c57046948743758a6fe78364c3858, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 743e95ee6ddd74ac98c76873c07bc536, type: 3}
   borkSound:
   - {fileID: 8300000, guid: b681834dd97c449a5bb68102a88240b0, type: 3}
   - {fileID: 8300000, guid: 28d74c73cc8b1458ca6f7a043a343375, type: 3}

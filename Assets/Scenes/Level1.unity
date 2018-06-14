@@ -210,9 +210,20 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114579788333638616, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 213130498390898242, guid: 3b88cd2c288f54d4fb3daa162cb7b0f9,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea567535b8466472a95215c5e2af6201, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &71610589 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1862596220577876, guid: ea567535b8466472a95215c5e2af6201,
+    type: 2}
+  m_PrefabInternal: {fileID: 71610588}
 --- !u!1001 &223116505
 Prefab:
   m_ObjectHideFlags: 0
@@ -331,6 +342,17 @@ Prefab:
       propertyPath: levelText
       value: 
       objectReference: {fileID: 516570989}
+    - target: {fileID: 114989089904310734, guid: 032f8ccc26ad04b0f86c1f44c365e5d6,
+        type: 2}
+      propertyPath: enemyTutorialTexts.Array.data[1]
+      value: The snake doge meanders willy-nilly, gradually moving to the kitty. It
+        won't stop until all it's midsections are gone.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971502944865330, guid: 032f8ccc26ad04b0f86c1f44c365e5d6,
+        type: 2}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 71610589}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 032f8ccc26ad04b0f86c1f44c365e5d6, type: 2}
   m_IsPrefabParent: 0
@@ -420,18 +442,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 212117168698721750, guid: 7b5fefcc96a7c4a508e02058b6257c3b,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 213478615096727902, guid: a4bb78ec2e21a41a5abe388f1c714a05,
-        type: 2}
-    - target: {fileID: 212313147860722820, guid: 7b5fefcc96a7c4a508e02058b6257c3b,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 213606095011035956, guid: 9ba943a6671b341faafab70c8f28f528,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b5fefcc96a7c4a508e02058b6257c3b, type: 2}
   m_IsPrefabParent: 0

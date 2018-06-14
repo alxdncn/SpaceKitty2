@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4827524055341536}
   - component: {fileID: 212271194826936980}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MiddleExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -632,7 +632,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 213516990083335810, guid: 6409bbd9fd2be4b768eb268fd85ab1fa, type: 2}
+  m_Sprite: {fileID: 213864544275827428, guid: 6409bbd9fd2be4b768eb268fd85ab1fa, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

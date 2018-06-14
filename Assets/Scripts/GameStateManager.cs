@@ -22,7 +22,9 @@ public class GameStateManager : MonoBehaviour {
 
 	int level = 0;
 
-	[SerializeField] float restartTime = 4;
+	[SerializeField] float goToNextLevelTimer = 2f;
+	[SerializeField] float gameOverTimer = 6f;
+	float restartTime;
 	float restartTimer = 0f;
 
 	public float RoundProgress {get; private set;}
@@ -79,7 +81,11 @@ public class GameStateManager : MonoBehaviour {
 		}
 
 		if(Input.GetKeyDown(KeyCode.T)){
-			Pause();
+			if(currentState == State.Paused){
+				RunGame();
+			} else {
+				Pause();
+			}
 		}
 	}
 
@@ -98,6 +104,7 @@ public class GameStateManager : MonoBehaviour {
 		DataBetweenScenes.totalScore = 0;
 		level = 0;
 		DataBetweenScenes.level = 1;
+		restartTime = gameOverTimer;
 		if(lostGame != null){
 			lostGame();
 		}
@@ -110,6 +117,7 @@ public class GameStateManager : MonoBehaviour {
 		DataBetweenScenes.totalScore = Score;
 		DataBetweenScenes.level++;
 		currentState = State.Ended;
+		restartTime = goToNextLevelTimer;
 		if(beatGame != null){
 			beatGame();
 		}
