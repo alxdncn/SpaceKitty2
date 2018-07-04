@@ -17,9 +17,7 @@ public class PowerUpHandler : MonoBehaviour {
 	}
 
 	delegate void CoolDowns();
-	CoolDowns coolDowns = null;
-
-//	System.Type[] powerUpSubclassList = ReflectionHelper.GetSubclasses (typeof(PowerUpBaseClass));
+	event CoolDowns coolDowns = null;
 
 	void Update(){
 		if (coolDowns != null) {
@@ -33,7 +31,8 @@ public class PowerUpHandler : MonoBehaviour {
 		if (powerUpType.Equals (typeof(BrightenPowerUp))) {
 			InitBrighten ();
 		} else if (powerUpType.Equals (typeof(DestroyAllPowerUp))) {
-			EnemyManager.Instance.DestroyAllEnemies ();
+			if(EnemyManager.Instance != null)
+				EnemyManager.Instance.DestroyAllEnemies ();
 		} else {
 			Debug.LogWarning ("This powerup type hasn't been added to the handler!");
 		}
