@@ -76,7 +76,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -106,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35dee4d1488c47f9bae498696f827dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderPrefab: {fileID: 1580758973958190, guid: 3f7b59c9d61a74a33bd1f292984ce3cc,
+  colliderPrefab: {fileID: 1580758973958190, guid: 28f3dcb53972d4f5fa5770ec5db2b064,
     type: 2}
   waitTimer: 3
 --- !u!114 &114287791874898382

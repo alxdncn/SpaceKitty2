@@ -37,9 +37,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4217807641257956}
   - component: {fileID: 61750719058391508}
+  - component: {fileID: 114110084142585142}
   - component: {fileID: 50956715851323952}
   - component: {fileID: 114519348497393742}
   - component: {fileID: 82055350002805088}
+  - component: {fileID: 114198601734218302}
   m_Layer: 0
   m_Name: Pup
   m_TagString: Untagged
@@ -265,6 +267,47 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114110084142585142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706236322944884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ceca0151985c4f5f9747dcc34f81e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  basicAnim: {fileID: 0}
+  interAnim: {fileID: 0}
+  kittyDeathAnim: {fileID: 0}
+  playerDeathAnim: {fileID: 0}
+--- !u!114 &114198601734218302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706236322944884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 492295970, guid: ab85ac808950aa04ea8320fc273cd8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_States: []
+  m_File: {fileID: 0}
+  speed: 1
+  m_Settings:
+    randomizeOnStart: 1
+    playOnStart: 1
+    overrideFileSettings: 0
+    customPlaybackMode: 1
+    customFramesPerSecond: 8
+    customBorder: {x: 0, y: 0, z: 0, w: 0}
+    customPixelsPerUnit: 100
+    customFilterMode: 2
+    wrapMode: 1
+    startFrame: 0
 --- !u!114 &114343729836450554
 MonoBehaviour:
   m_ObjectHideFlags: 1

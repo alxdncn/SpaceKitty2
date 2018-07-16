@@ -20,6 +20,8 @@ public class MotherShip : EnemyBaseClass {
 	List<PuppyEnemy> activePups = new List<PuppyEnemy> ();
 	List<PuppyEnemy> inactivePups = new List<PuppyEnemy> ();
 
+	[SerializeField] GameObject sheild;
+
 	protected override void Awake ()
 	{
 		base.Awake ();
@@ -31,6 +33,7 @@ public class MotherShip : EnemyBaseClass {
 	{
 		base.Reset ();
 		crossVector = Vector3.Cross (GetVectorToKitty (transform).normalized, Vector3.forward);
+		ReturnShield ();
 		waitToSpawnPupsTimer = 0f;
 	}
 
@@ -50,6 +53,7 @@ public class MotherShip : EnemyBaseClass {
 
 		if(puppySpawnTimer >= puppySpawnTime){
 			puppySpawnTimer = 0f;
+			RemoveShield ();
 			if(inactivePups.Count > 0){
 				PuppyEnemy newPup = inactivePups[0];
 				inactivePups.RemoveAt(0);
@@ -64,6 +68,14 @@ public class MotherShip : EnemyBaseClass {
 		}
 
 		puppySpawnTimer += Time.deltaTime;
+	}
+
+	void RemoveShield(){
+		sheild.SetActive (false);
+	}
+
+	void ReturnShield(){
+		sheild.SetActive (true);
 	}
 
 	void InitializePup(PuppyEnemy pup){

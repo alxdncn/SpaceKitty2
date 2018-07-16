@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -123,12 +122,12 @@ Prefab:
     - target: {fileID: 224059449794712082, guid: ea567535b8466472a95215c5e2af6201,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 239
       objectReference: {fileID: 0}
     - target: {fileID: 224059449794712082, guid: ea567535b8466472a95215c5e2af6201,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 134.5
       objectReference: {fileID: 0}
     - target: {fileID: 224059449794712082, guid: ea567535b8466472a95215c5e2af6201,
         type: 2}
@@ -209,6 +208,76 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224670836222994862, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -85
+      objectReference: {fileID: 0}
+    - target: {fileID: 224877800892983072, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 224465777810124812, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 25.994904
+      objectReference: {fileID: 0}
+    - target: {fileID: 224465777810124812, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 230
+      objectReference: {fileID: 0}
+    - target: {fileID: 224794212715506388, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -25.994904
+      objectReference: {fileID: 0}
+    - target: {fileID: 224794212715506388, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 230
+      objectReference: {fileID: 0}
+    - target: {fileID: 224699072877934976, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -45.994904
+      objectReference: {fileID: 0}
+    - target: {fileID: 224699072877934976, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 224240483346926246, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 45.994904
+      objectReference: {fileID: 0}
+    - target: {fileID: 224240483346926246, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 224877800892983072, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224877800892983072, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224877800892983072, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: -162.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 224877800892983072, guid: ea567535b8466472a95215c5e2af6201,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -519.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea567535b8466472a95215c5e2af6201, type: 2}
