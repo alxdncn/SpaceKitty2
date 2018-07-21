@@ -18,6 +18,8 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	[SerializeField] [Range(0,1)] float cooldownAlpha = 0.5f;
 
+	[SerializeField] GameObject starPrefab;
+
 	[SerializeField] protected int startHitPoints = 1;
 	protected int hitPoints;
 
@@ -228,7 +230,6 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		} else{
 			Debug.LogWarning("No death animator found!");
 		}
-
 		StartCoroutine(WaitForDeathAnimationToEnd(animTime));
 	}
 
@@ -245,6 +246,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 			PlayLazor ();
 			if (hitPoints <= 0) {
 				GameStateManager.instance.ChangeScore();
+				GameObject starPoint = (GameObject)Instantiate(starPrefab, transform.position, Quaternion.identity);
 				DestroyEnemy ();
 			}
 		} else if(col.gameObject.tag == "Kitty"){

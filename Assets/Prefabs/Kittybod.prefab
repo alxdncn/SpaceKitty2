@@ -241,6 +241,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f3e8161efd524449ba39a04e48fd70ad, type: 3}
   finalMeow:
   - {fileID: 8300000, guid: ac019816aa181449d9aecf15f35c859d, type: 3}
+  hurtAnim: {fileID: 11400000, guid: 2ed99caf1bb8643eba72cdc5bd09dab5, type: 2}
+  dieAnim: {fileID: 11400000, guid: a89bfb47b27324440aa3e6ca7750501e, type: 2}
+  baseAnim: {fileID: 11400000, guid: a4bb78ec2e21a41a5abe388f1c714a05, type: 2}
+  LivesTextAnim: {fileID: 0}
+  LivesTVAnim: {fileID: 0}
 --- !u!114 &114932387548317548
 MonoBehaviour:
   m_ObjectHideFlags: 1

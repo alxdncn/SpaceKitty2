@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224794212715506388}
   - component: {fileID: 222326631883676482}
   - component: {fileID: 114112242070958808}
+  - component: {fileID: 95871802350009786}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -109,6 +110,7 @@ GameObject:
   - component: {fileID: 222548995807596566}
   - component: {fileID: 114579127328542698}
   - component: {fileID: 114656407807379278}
+  - component: {fileID: 95221000723203008}
   m_Layer: 0
   m_Name: LivesTV
   m_TagString: Untagged
@@ -145,6 +147,7 @@ GameObject:
   - component: {fileID: 222173654076260850}
   - component: {fileID: 114141716392463628}
   - component: {fileID: 114851740044250778}
+  - component: {fileID: 95410592291140290}
   m_Layer: 0
   m_Name: ScoreTV
   m_TagString: Untagged
@@ -162,6 +165,7 @@ GameObject:
   - component: {fileID: 224465777810124812}
   - component: {fileID: 222295627176351574}
   - component: {fileID: 114199009038694242}
+  - component: {fileID: 95147204037605308}
   m_Layer: 5
   m_Name: Lives
   m_TagString: Untagged
@@ -224,6 +228,57 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95147204037605308
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860961698319686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d70a3c4ff0d72451cbd328b96923eeb6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95221000723203008
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628879495932692}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f385b735f21cf402bb2e5acf45b6f48a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95410592291140290
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742390782583784}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa1f405c411ec4d3e903d7e2bcb59301, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95583008320653992
 Animator:
   serializedVersion: 3
@@ -234,6 +289,23 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 7e06412ef60874de790a7f651be1d901, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95871802350009786
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095649990563572}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 167e3160e5f674c9893a1b20417bd7a2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -358,7 +430,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 213876089441914284, guid: 0a467ef717c0a41fe93dc59fb24b3036, type: 2}
+  m_Sprite: {fileID: 213778871877790858, guid: 0a467ef717c0a41fe93dc59fb24b3036, type: 2}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

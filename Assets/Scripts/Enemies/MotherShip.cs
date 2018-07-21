@@ -33,7 +33,6 @@ public class MotherShip : EnemyBaseClass {
 	{
 		base.Reset ();
 		crossVector = Vector3.Cross (GetVectorToKitty (transform).normalized, Vector3.forward);
-		ReturnShield ();
 		waitToSpawnPupsTimer = 0f;
 	}
 
@@ -74,7 +73,9 @@ public class MotherShip : EnemyBaseClass {
 		sheild.SetActive (false);
 	}
 
-	void ReturnShield(){
+
+	protected virtual IEnumerator ReturnShield (){
+		yield return new WaitForSeconds(1f);
 		sheild.SetActive (true);
 	}
 
@@ -84,6 +85,7 @@ public class MotherShip : EnemyBaseClass {
 		if(randInt == 0){
 			direction = -direction;
 		}
+		StartCoroutine (ReturnShield());
 		pup.InitializeWithVector(direction, this.gameObject);
 		pup.Reset();
 	}

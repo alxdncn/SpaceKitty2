@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DoodleStudio95;
 
 public class Kitty : MonoBehaviour {
 
@@ -28,10 +29,23 @@ public class Kitty : MonoBehaviour {
 	public AudioClip[] hurtMeows;
 	public AudioClip[] finalMeow;
 
+	//for anim
+	DoodleAnimator animator;
+
+	public DoodleAnimationFile hurtAnim;
+	public DoodleAnimationFile dieAnim;
+	public DoodleAnimationFile baseAnim;
+
+	Animator LivesTextAnim;
+	Animator LivesTVAnim;
+
 	// Use this for initialization
 	void Awake () {
 		instance = this;
 		trans = transform;
+		LivesTextAnim = GameObject.Find ("Lives").GetComponent<Animator> ();
+		LivesTVAnim = GameObject.Find ("LivesTV").GetComponent<Animator> ();
+		animator = GetComponentInChildren<DoodleAnimator>();
 		allSprites = GetComponentsInChildren<SpriteRenderer>();
 		mySource = GetComponent<AudioSource> ();
 		lives = DataBetweenScenes.kittyLives;
@@ -98,15 +112,31 @@ public class Kitty : MonoBehaviour {
 		}
 	}
 
+	protected virtual IEnumerator RestartBaseAnim (){
+		yield return new WaitForSeconds(1f);
+		if(lives > 0 && lives < 9){
+			animator.ChangeAnimation (baseAnim);
+			animator.Play ();
+		
+		} 
+	}
+
 	void PlayDeadMew(){
 		int randMew = Random.Range (0, finalMeow.Length);
 		mySource.clip = finalMeow [randMew];
+		animator.ChangeAnimation (dieAnim);
+		animator.Play ();
 		mySource.Play ();
 	}
 
 	void PlayHurtMew(){
 		int randMew = Random.Range (0, hurtMeows.Length);
 		mySource.clip = hurtMeows [randMew];
+		LivesTextAnim.SetTrigger ("LostLife");
+		LivesTVAnim.SetTrigger ("LostLife");
+		animator.ChangeAnimation (hurtAnim);
+		animator.Play ();
+		StartCoroutine (RestartBaseAnim ());
 		mySource.Play ();
 	}
 }

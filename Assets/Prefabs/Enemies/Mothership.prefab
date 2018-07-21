@@ -288,6 +288,7 @@ MonoBehaviour:
   coolDownTime: 1
   cooldownFadeTime: 0.1
   cooldownAlpha: 0.5
+  starPrefab: {fileID: 1872816825875082, guid: 3d4ed5be82ef84014978914f16cfcf06, type: 2}
   startHitPoints: 7
   movementSpeed: 1
   deathAnimator: {fileID: 95028881694643958}
