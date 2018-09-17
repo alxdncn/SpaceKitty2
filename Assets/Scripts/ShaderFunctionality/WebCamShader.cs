@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +23,8 @@ public class WebCamShader : MonoBehaviour {
 	Material renderMat;
 	[SerializeField] [Range(0,1)] float saturationThreshold;
 	[SerializeField] Color renderLightColor;
+	[SerializeField] Color outlineColor;
+	[SerializeField] [Range(1, 2000)] float outlineSize;
 
 	Texture2D renderedTex = null;
 	public int texReadIncrement = 4;
@@ -38,6 +40,9 @@ public class WebCamShader : MonoBehaviour {
 		renderMat = new Material (Shader.Find ("Hidden/DrawRed"));
 		renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 		renderMat.SetColor ("_RenderColor", renderLightColor);
+		renderMat.SetFloat("_Increment", 1/Screen.width * outlineSize);
+		renderMat.SetColor("_OutlineColor", outlineColor);
+
 
 		initialized = true;
 	}
@@ -46,6 +51,8 @@ public class WebCamShader : MonoBehaviour {
 		if (initialized) {
 			renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 			renderMat.SetColor ("_RenderColor", renderLightColor);
+			renderMat.SetFloat("_Increment", 1/Screen.width * outlineSize);
+			renderMat.SetColor("_OutlineColor", outlineColor);
 		}
 	}
 
@@ -89,6 +96,8 @@ public class WebCamShader : MonoBehaviour {
 					}
 				}
 			}
+
+			// Graphics.Blit (source, destination, secondRenderMat);
 		}
 	}
 }

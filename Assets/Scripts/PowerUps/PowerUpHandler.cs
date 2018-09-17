@@ -31,9 +31,10 @@ public class PowerUpHandler : MonoBehaviour {
 		if (powerUpType.Equals (typeof(BrightenPowerUp))) {
 			InitBrighten ();
 		} else if (powerUpType.Equals (typeof(DestroyAllPowerUp))) {
-			if(EnemyManager.Instance != null)
-				EnemyManager.Instance.DestroyAllEnemies ();
-		} else {
+			DestroyAllEnemies();
+		} else if(powerUpType.Equals(typeof(HealthBackPowerUp))){
+			GetHealthBack();
+		} else{
 			Debug.LogWarning ("This powerup type hasn't been added to the handler!");
 		}
 	}
@@ -45,7 +46,9 @@ public class PowerUpHandler : MonoBehaviour {
 			obj.SetActive (false);
 		} else if(powerUpType.Equals(typeof(DestroyAllPowerUp))){
 			obj.SetActive (false);
-		} else {
+		} else if(powerUpType.Equals(typeof(HealthBackPowerUp))){
+			obj.SetActive (false);
+		} else{
 			Debug.LogWarning ("This powerup type hasn't been added to the handler!");
 		}
 	}
@@ -79,4 +82,18 @@ public class PowerUpHandler : MonoBehaviour {
 	}
 	#endregion
 
+	#region DESTROY ALL
+	void DestroyAllEnemies(){
+		if(EnemyManager.Instance != null)
+			EnemyManager.Instance.DestroyAllEnemies ();
+	}
+	#endregion
+
+	#region HEALTH
+	void GetHealthBack(){
+		if(Kitty.instance.lives < 9){
+			Kitty.instance.GetLife();
+		}
+	}
+	#endregion
 }
