@@ -123,24 +123,24 @@ public class EnemyManager : MonoBehaviour {
 		}
 	}
 
-	void ShuffleAndReplenishBag(){
-		currentEnemyBag.Clear ();
+void ShuffleAndReplenishBag<T>(T[] bagPreset, List<T> bagToFill){
+		bagToFill.Clear ();
 
-		for (int i = 0; i < enemyPrefabBag.Length; i++) {
-			currentEnemyBag.Add (enemyPrefabBag [i]);
+		for (int i = 0; i < bagPreset.Length; i++) {
+			bagToFill.Add (bagPreset [i]);
 		}
 
-		for (int i = 0; i < currentEnemyBag.Count; i++) {
-			EnemyBaseClass temp = currentEnemyBag [i];
-			int randomIndex = Random.Range (i, currentEnemyBag.Count);
-			currentEnemyBag [i] = currentEnemyBag [randomIndex];
-			currentEnemyBag [randomIndex] = temp;
+		for (int i = 0; i < bagToFill.Count; i++) {
+			T temp = bagToFill [i];
+			int randomIndex = Random.Range (i, bagToFill.Count);
+			bagToFill [i] = bagToFill [randomIndex];
+			bagToFill [randomIndex] = temp;
 		}
 	}
 
 	void SpawnEnemy(){
 		if (currentEnemyBag.Count == 0) {
-			ShuffleAndReplenishBag ();
+			ShuffleAndReplenishBag (enemyPrefabBag, currentEnemyBag);
 		}
 
 		EnemyBaseClass newEnemy = currentEnemyBag[0];

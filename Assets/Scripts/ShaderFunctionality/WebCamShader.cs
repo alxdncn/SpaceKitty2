@@ -24,7 +24,7 @@ public class WebCamShader : MonoBehaviour {
 	[SerializeField] [Range(0,1)] float saturationThreshold;
 	[SerializeField] Color renderLightColor;
 	[SerializeField] Color outlineColor;
-	[SerializeField] [Range(1, 2000)] float outlineSize;
+	[SerializeField] [Range(0, 10)] float outlineSize = 1f;
 
 	Texture2D renderedTex = null;
 	public int texReadIncrement = 4;
@@ -40,9 +40,8 @@ public class WebCamShader : MonoBehaviour {
 		renderMat = new Material (Shader.Find ("Hidden/DrawRed"));
 		renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 		renderMat.SetColor ("_RenderColor", renderLightColor);
-		renderMat.SetFloat("_Increment", 1/Screen.width * outlineSize);
+		renderMat.SetFloat("_Increment", 1.0f/(float)Screen.width * (float)outlineSize);
 		renderMat.SetColor("_OutlineColor", outlineColor);
-
 
 		initialized = true;
 	}
@@ -51,7 +50,7 @@ public class WebCamShader : MonoBehaviour {
 		if (initialized) {
 			renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 			renderMat.SetColor ("_RenderColor", renderLightColor);
-			renderMat.SetFloat("_Increment", 1/Screen.width * outlineSize);
+			renderMat.SetFloat("_Increment", 1.0f/(float)Screen.width * (float)outlineSize);
 			renderMat.SetColor("_OutlineColor", outlineColor);
 		}
 	}
