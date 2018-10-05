@@ -52,6 +52,8 @@ public class GameStateManager : MonoBehaviour {
 		level = SceneManager.GetActiveScene().buildIndex;
 		Score = DataBetweenScenes.totalScore;
 
+		Cursor.visible = false;
+
 		RunGame();
 	}
 
@@ -63,6 +65,12 @@ public class GameStateManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetKeyDown(KeyCode.R)){
+			LostGame();
+			restartTimer = 0;
+			SceneManager.LoadScene(level);
+		}
+
 		// Debug.Log(currentState + " " + RoundProgress);
 		if(currentState == State.Running){
 			time += UnityEngine.Time.deltaTime;
@@ -87,6 +95,10 @@ public class GameStateManager : MonoBehaviour {
 				Pause();
 			}
 		}
+
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			Application.Quit();
+		}
 	}
 
 	public void RunGame(){
@@ -104,6 +116,10 @@ public class GameStateManager : MonoBehaviour {
 		DataBetweenScenes.totalScore = 0;
 		level = 0;
 		DataBetweenScenes.level = 1;
+		if(DataBetweenScenes.allKnownEnemies != null){
+			DataBetweenScenes.allKnownEnemies.Clear();
+		}
+		DataBetweenScenes.kittyLives = 9;
 		restartTime = gameOverTimer;
 		if(lostGame != null){
 			lostGame();

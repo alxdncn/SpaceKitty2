@@ -7,6 +7,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 	protected Collider2D[] allCols;
 
 	protected List<SpriteRenderer> allSprites;
+	List<Color> spriteStartColors;
 
 	protected float coolDownTimer = 0f;
 	[SerializeField] protected float coolDownTime = 0.5f;
@@ -47,13 +48,16 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		SpriteRenderer myRend = GetComponent<SpriteRenderer>();
 
 		allSprites = new List<SpriteRenderer>();
+		spriteStartColors = new List<Color>();
 		if(myRend != null){
 			allSprites.Add(myRend);
+			spriteStartColors.Add(myRend.color);
 		}
 
 		for(int i = 0; i < spriteArray.Length; i++){
 			if(spriteArray[i].gameObject.layer != LayerMask.NameToLayer("DeathAnimations")){
 				allSprites.Add(spriteArray[i]);
+				spriteStartColors.Add(spriteArray[i].color);
 			}
 		}
 
@@ -138,7 +142,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 				coolDownTimer = 0f;
 				hit = false;
 				for(int i = 0; i < allSprites.Count; i++){
-					allSprites[i].color = new Color(allSprites[i].color.r, allSprites[i].color.g, allSprites[i].color.b, 1f);
+					allSprites[i].color = spriteStartColors[i];
 				}
 				return;
 			}

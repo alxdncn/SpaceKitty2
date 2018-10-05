@@ -65,15 +65,15 @@ public class EnemyManager : MonoBehaviour {
 		}
 	}
 
-	// void OnEnable(){
-	// 	GameStateManager.instance.beatGame += DestroyAllEnemies;
-	// }
+	void OnEnable(){
+		GameStateManager.instance.beatGame += SetKnownEnemies;
+	}
 
-	// void OnDisable(){
-	// 	GameStateManager.instance.beatGame -= DestroyAllEnemies;
-	// }
+	void OnDisable(){
+		GameStateManager.instance.beatGame -= SetKnownEnemies;
+	}
 
-	void OnDestroy(){
+	void SetKnownEnemies(){
 		DataBetweenScenes.allKnownEnemies = knownEnemyTypes;
 	}
 

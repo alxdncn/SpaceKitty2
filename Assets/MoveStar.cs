@@ -11,6 +11,7 @@ public class MoveStar : MonoBehaviour {
 
 	public float duration;
 	public float rotationsPerMin;
+	float timer = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +23,8 @@ public class MoveStar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.Rotate(0f,0f,6.0f*rotationsPerMin*Time.deltaTime);
-		transform.position = Vector3.Slerp(transform.position, ScoreBoard.transform.position, Time.time / duration);
+		timer += Time.deltaTime;
+		transform.position = Vector3.Slerp(transform.position, ScoreBoard.transform.position, timer / duration);
 		if (Vector3.Distance(transform.position, ScoreBoard.transform.position) <3f) {
 			ScoreAnimator.SetTrigger ("Scored");
 			ScoreTextAnimator.SetTrigger ("Scored");

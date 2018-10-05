@@ -51,6 +51,14 @@ public class Kitty : MonoBehaviour {
 		lives = DataBetweenScenes.kittyLives;
 	}
 
+	void OnEnable(){
+		GameStateManager.instance.beatGame += SetStoredLives;
+	}
+
+	void OnDisable(){
+		GameStateManager.instance.beatGame -= SetStoredLives;
+	}
+
 	void Update(){
 		HandleCooldown();
 	}
@@ -85,7 +93,7 @@ public class Kitty : MonoBehaviour {
 		}
 	}
 
-	void OnDestroy(){
+	void SetStoredLives(){
 		DataBetweenScenes.kittyLives = lives;
 	}
 	
@@ -95,20 +103,22 @@ public class Kitty : MonoBehaviour {
 		}
 		// if(col.gameObject.tag == "PixelColliders")
 		// 	return;
+		if(GameStateManager.instance.currentState == GameStateManager.State.Running || 
+		GameStateManager.instance.currentState == GameStateManager.State.TimesUp){
+			hit = true;
+			coolDownTimer = 0;
+			lives--;
 
-		hit = true;
-		coolDownTimer = 0;
-		lives--;
+			if(kittyHit != null){
+				PlayHurtMew ();
+				kittyHit();
+			}
 
-		if(kittyHit != null){
-			PlayHurtMew ();
-			kittyHit();
-		}
-
-		if(lives <= 0){
-			lives = 9;
-			PlayDeadMew ();
-			GameStateManager.instance.LostGame();
+			if(lives <= 0){
+				lives = 9;
+				PlayDeadMew ();
+				GameStateManager.instance.LostGame();
+			}
 		}
 	}
 

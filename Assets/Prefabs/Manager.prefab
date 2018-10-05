@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1158945521445930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.4, y: 15.3, z: 16.125}
+  m_LocalPosition: {x: -24, y: 15.3, z: 16.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4122874609090682}
@@ -133,45 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabBag:
-  - {fileID: 114748991210093006, guid: 5047ce2756de44deca0d6d9e4957ece5, type: 2}
-  - {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
-  - {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
-  - {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
-  - {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
-  - {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
-  - {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
-  - {fileID: 114293904182156136, guid: 5f25c80491ac84c10932e53e8036bd32, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
-  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
   - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
   enemyTypeNames:
   - Regular
@@ -182,7 +143,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7c40b7eae6a254548b4120129f529052, type: 3}
   - {fileID: 21300000, guid: a29d5f936d9324e8a9913284d8fca58d, type: 3}
   enemyTutorialTexts:
-  - ZAP ON SITE!
+  - ZAP ON SIGHT!
   - A TRICKY DOGE. ZAP THE MIDDLES FIRST.
   - ONE TOUGH MOTHER. ZAP WHEN ITS SHIELD IS DOWN. AND WATCH FOR ITS PUPS!
   startSpawnTime: 1.5

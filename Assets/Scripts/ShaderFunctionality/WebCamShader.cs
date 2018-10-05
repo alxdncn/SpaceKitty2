@@ -34,11 +34,20 @@ public class WebCamShader : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		webCamTex = new WebCamTexture ();
+		WebCamDevice[] devices = WebCamTexture.devices;
+		WebCamDevice externalDevice = devices[0];
+		for(int i = 0; i < devices.Length; i++){
+			if(devices[i].name.Contains("Logitech")){
+				externalDevice = devices[i];
+				break;
+			}
+		}
+		webCamTex.deviceName = externalDevice.name;
 		webCamTex.Play();
 		renderMat = new Material (Shader.Find ("Hidden/DrawRed"));
 		renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 		renderMat.SetColor ("_RenderColor", renderLightColor);
-
+		Debug.Log("HEYO?" + webCamTex.isPlaying);
 		initialized = true;
 	}
 
@@ -46,6 +55,15 @@ public class WebCamShader : MonoBehaviour {
 		if (initialized) {
 			renderMat.SetFloat ("_SaturationThreshold", saturationThreshold);
 			renderMat.SetColor ("_RenderColor", renderLightColor);
+		}
+	}
+
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.UpArrow)){
+			IncreaseBrightness(0.01f);
+		}
+		if(Input.GetKeyDown(KeyCode.DownArrow)){
+			DecreaseBrightness(0.01f);
 		}
 	}
 
@@ -90,5 +108,9 @@ public class WebCamShader : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void OnDestroy(){
+		webCamTex.Stop();
 	}
 }
