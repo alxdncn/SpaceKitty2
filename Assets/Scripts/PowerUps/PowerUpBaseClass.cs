@@ -39,6 +39,21 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 		Spawn();
 	}
 
+	public void Reset(){
+		col.enabled = false;
+		DoodleAnimator anim = GetComponent<DoodleAnimator>();
+		if(anim == null){
+			anim = GetComponentInChildren<DoodleAnimator>();
+		}
+		if(anim != null){
+			introTime =  anim.CurrentAnimationLengthInSeconds;
+		} else{
+			introTime = 0f;
+		}
+		playingIntroAnim = true;
+		Spawn();
+	}
+
 	void Spawn(){
 		float ySize = Camera.main.orthographicSize;
 		float xSize = ySize * Camera.main.aspect;

@@ -94,13 +94,13 @@
 			sampler2D _BackgroundTexture;
 			float4 _OutlineColor;
 			uniform fixed4 _RenderColor;
-			float _Increment;
+			uniform float _Increment;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 colMine = tex2D(_BackgroundTexture, i.uv);
 				fixed4 c = _RenderColor;
-				_Increment = 0.005;
+				// _Increment = 0.005;
 
 				if(colMine.r != c.r && colMine.g != c.g && colMine.b != c.b){
 					fixed4 col1 = tex2D(_BackgroundTexture, i.uv.xy + half2(_Increment, 0));

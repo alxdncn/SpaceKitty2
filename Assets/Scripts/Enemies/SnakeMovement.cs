@@ -264,8 +264,15 @@ public class SnakeMovement : EnemyBaseClass {
 		if(middles.Count > 0){
 			GameObject killMiddle = middles [middles.Count - 1];
 
+			Vector3 explosionPos = Vector3.one;
+			if(middles.Count > 1){
+				explosionPos = middles[middles.Count - 2].transform.position;
+			} else{
+				explosionPos = killMiddle.transform.position;
+			}
+
 			childExplosion.transform.parent = null;
-			childExplosion.transform.position = killMiddle.transform.position;
+			childExplosion.transform.position = explosionPos;
 			animator.Play("SnakeMiddleExplode");
 
 			inactiveMiddles.Add (killMiddle);

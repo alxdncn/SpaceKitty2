@@ -291,7 +291,7 @@ Prefab:
     - target: {fileID: 114989089904310734, guid: 032f8ccc26ad04b0f86c1f44c365e5d6,
         type: 2}
       propertyPath: enemyPrefabBag.Array.size
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4122874609090682, guid: 032f8ccc26ad04b0f86c1f44c365e5d6, type: 2}
       propertyPath: m_LocalPosition.x
@@ -408,6 +408,12 @@ Prefab:
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 71610590}
+    - target: {fileID: 114989089904310734, guid: 032f8ccc26ad04b0f86c1f44c365e5d6,
+        type: 2}
+      propertyPath: enemyPrefabBag.Array.data[0]
+      value: 
+      objectReference: {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 032f8ccc26ad04b0f86c1f44c365e5d6, type: 2}
   m_IsPrefabParent: 0
