@@ -213,12 +213,17 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		}
 	}
 
-	public virtual void DestroyEnemy(){
+	public virtual void DestroyEnemy(bool playerKilled){
 		for (int i = 0; i < allCols.Length; i++) {
 			allCols[i].enabled = false;
 		}
 		for(int i = 0; i < allSprites.Count; i++){
 			allSprites[i].enabled = false;
+		}
+
+		if(playerKilled){
+			GameStateManager.instance.ChangeScore();
+			GameObject starPoint = (GameObject)Instantiate(starPrefab, transform.position, Quaternion.identity);
 		}
 
 		float animTime = 0f;
@@ -245,12 +250,10 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 			HitEnemy ();
 			PlayLazor ();
 			if (hitPoints <= 0) {
-				GameStateManager.instance.ChangeScore();
-				GameObject starPoint = (GameObject)Instantiate(starPrefab, transform.position, Quaternion.identity);
-				DestroyEnemy ();
+				DestroyEnemy (true);
 			}
 		} else if(col.gameObject.tag == "Kitty"){
-			DestroyEnemy();
+			DestroyEnemy(false);
 		}
 	}
 }

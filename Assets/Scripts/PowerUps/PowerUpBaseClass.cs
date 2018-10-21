@@ -22,15 +22,18 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 	float xSin;
 	float ySin;
 
+	DoodleAnimator anim;
+	[SerializeField] DoodleAnimationFile activateAnim;
+	[SerializeField] DoodleAnimationFile baseAnim; //TODO: Make this work in Awake, where we grab the animation on the animator
+
+	bool activating = false;
+
 	protected virtual void Awake(){
 		Debug.Log("In awake");
 		col = GetComponent<Collider2D>();
 		col.enabled = false;
 		hitFeedbackAnimator = GetComponentInChildren<Animator>();
-		DoodleAnimator anim = GetComponent<DoodleAnimator>();
-		if(anim == null){
-			anim = GetComponentInChildren<DoodleAnimator>();
-		}
+		anim = GetComponentInChildren<DoodleAnimator>();
 		if(anim != null){
 			introTime =  anim.CurrentAnimationLengthInSeconds;
 		} else{
@@ -41,16 +44,14 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 
 	public void Reset(){
 		col.enabled = false;
-		DoodleAnimator anim = GetComponent<DoodleAnimator>();
-		if(anim == null){
-			anim = GetComponentInChildren<DoodleAnimator>();
-		}
+		anim = GetComponentInChildren<DoodleAnimator>();
 		if(anim != null){
 			introTime =  anim.CurrentAnimationLengthInSeconds;
 		} else{
 			introTime = 0f;
 		}
 		playingIntroAnim = true;
+		activating = false;
 		Spawn();
 	}
 
@@ -68,7 +69,6 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 
 		transform.position = new Vector3(xPos, yPos, 0);
 
-		Debug.Log(xSize);
 	}
 
 	void StartObjectAfterAnimation(){
@@ -104,6 +104,13 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 			Move();
 
 		if(playerHits >= minPlayerHits){
+			if(!activating){
+				Debug.Log("Activating");
+				activating = true;
+				// anim.Stop();
+				// anim.ChangeAnimation(activateAnim);
+				// anim.Play();
+			}
 			getPowerUpTimer += Time.deltaTime;
 			if(getPowerUpTimer > getPowerUpTime){
 				getPowerUpTimer = 0f;
@@ -111,11 +118,18 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 				Debug.Log("HEYO WE GOT DAT POWERUP");
 				PlayerGetsPowerUp();
 			}
+		} else if(activating){
+			activating = false;
+			Debug.Log("Deactivating");
+			// anim.Stop();
+			// anim.ChangeAnimation(baseAnim);
+			// anim.Play();
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag == "PixelColliders") {
+			Debug.Log("HIT THE POWERUP");
 			playerHits++;
 		}
 	}
@@ -124,6 +138,7 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 		if (col.gameObject.tag == "PixelColliders") {
 			playerHits--;
 			if(playerHits < minPlayerHits){
+				Debug.Log("Reset powerup timer");
 				getPowerUpTimer = 0;
 			}
 		}

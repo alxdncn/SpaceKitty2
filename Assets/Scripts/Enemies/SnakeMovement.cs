@@ -283,9 +283,9 @@ public class SnakeMovement : EnemyBaseClass {
 		}
 	}
 
-	public override void DestroyEnemy(){
+	public override void DestroyEnemy(bool playerKilled){
 		ResetChildExplosion();
-		base.DestroyEnemy();
+		base.DestroyEnemy(playerKilled);
 	}
 
 	void ResetChildExplosion(){

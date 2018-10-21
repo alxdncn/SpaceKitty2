@@ -174,9 +174,9 @@ void ShuffleAndReplenishBag<T>(T[] bagPreset, List<T> bagToFill){
     }
 
     //Call the destroy function on all enemies, which will trigger animation and then call EnemyIsDestroyed on this class
-    public void DestroyAllEnemies(){
+    public void DestroyAllEnemies(bool playerKilled){
 		for (int i = activeEnemies.Count - 1; i >= 0; i--) {
-			activeEnemies [i].DestroyEnemy ();
+			activeEnemies [i].DestroyEnemy (playerKilled);
 		}
 	}
 

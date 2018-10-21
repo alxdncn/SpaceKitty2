@@ -119,7 +119,7 @@ MonoBehaviour:
   timeText: {fileID: 0}
   tutorialObject: {fileID: 0}
   levelText: {fileID: 0}
-  gameOverText: {fileID: 0}
+  gameOverPanel: {fileID: 0}
   tutorialDisplayTime: 5
 --- !u!114 &114989089904310734
 MonoBehaviour:

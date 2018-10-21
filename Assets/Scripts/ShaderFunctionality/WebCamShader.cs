@@ -22,7 +22,7 @@ public class WebCamShader : MonoBehaviour {
 	//Shader stuff
 	Material renderMat;
 	[SerializeField] [Range(0,1)] float saturationThreshold;
-	[SerializeField] Color renderLightColor;
+	public Color renderLightColor;
 	[SerializeField] Color outlineColor;
 	[SerializeField] [Range(0, 10)] float outlineSize = 1f;
 
@@ -32,9 +32,10 @@ public class WebCamShader : MonoBehaviour {
 	Rect texRect;
 
 	[HideInInspector] public List<Vector2> brightPixelPositions = new List<Vector2> ();
+    [HideInInspector] public Color startRenderLightColor;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
 		webCamTex = new WebCamTexture ();
 		webCamTex.Play();
 		renderMat = new Material (Shader.Find ("Hidden/DrawRed"));
@@ -42,6 +43,8 @@ public class WebCamShader : MonoBehaviour {
 		renderMat.SetColor ("_RenderColor", renderLightColor);
 		renderMat.SetFloat("_Increment", 1.0f/(float)Screen.width * (float)outlineSize);
 		renderMat.SetColor("_OutlineColor", outlineColor);
+
+		startRenderLightColor = renderLightColor;
 
 		initialized = true;
 	}
@@ -71,6 +74,7 @@ public class WebCamShader : MonoBehaviour {
 	{
 		if (initialized) {
 			renderMat.SetTexture ("_WebCamTex", webCamTex);
+			renderMat.SetColor("_RenderColor", renderLightColor);
 
 			Graphics.Blit (source, destination, renderMat);
 
