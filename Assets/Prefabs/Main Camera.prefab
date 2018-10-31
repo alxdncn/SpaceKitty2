@@ -76,6 +76,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -121,8 +122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saturationThreshold: 0.99
   renderLightColor: {r: 1, g: 0, b: 0, a: 0}
+  outlineColor: {r: 0.034482475, g: 0, b: 1, a: 0}
+  outlineSize: 1
   texReadIncrement: 16
   brightPixelPositions: []
+  startRenderLightColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!124 &124713134151157076
 Behaviour:
   m_ObjectHideFlags: 1

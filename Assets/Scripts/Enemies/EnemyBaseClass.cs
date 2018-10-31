@@ -18,7 +18,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 
 	[SerializeField] [Range(0,1)] float cooldownAlpha = 0.5f;
 
-	[SerializeField] GameObject starPrefab;
+	[SerializeField] protected GameObject starPrefab;
 
 	[SerializeField] protected int startHitPoints = 1;
 	protected int hitPoints;
@@ -118,7 +118,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		playPoint = Random.Range (7f, 10f);
 	}
 
-	void PlayLazor(){
+	protected void PlayLazor(){
 		int lazor = Random.Range (0, laserzSounds.Length);
 		audioSource.volume = 0.8f;
 		audioSource.clip = laserzSounds [lazor];
@@ -243,7 +243,7 @@ public abstract class EnemyBaseClass : MonoBehaviour {
 		EnemyManager.Instance.EnemyIsDestroyed(this);
 	}
 
-	void OnTriggerEnter2D(Collider2D col){
+	protected virtual void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag == "PixelColliders" && !hit && 
 		(GameStateManager.instance.currentState == GameStateManager.State.Running || 
 		GameStateManager.instance.currentState == GameStateManager.State.TimesUp)) {

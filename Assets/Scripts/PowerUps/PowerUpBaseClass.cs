@@ -22,9 +22,11 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 	float xSin;
 	float ySin;
 
+	SpriteRenderer rend;
 	DoodleAnimator anim;
-	[SerializeField] DoodleAnimationFile activateAnim;
-	[SerializeField] DoodleAnimationFile baseAnim; //TODO: Make this work in Awake, where we grab the animation on the animator
+	
+	[SerializeField] DoodleAnimationFile baseAnim;
+	[SerializeField] DoodleAnimationFile activatingAnim;
 
 	bool activating = false;
 
@@ -34,6 +36,8 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 		col.enabled = false;
 		hitFeedbackAnimator = GetComponentInChildren<Animator>();
 		anim = GetComponentInChildren<DoodleAnimator>();
+		rend = GetComponentInChildren<SpriteRenderer>();
+
 		if(anim != null){
 			introTime =  anim.CurrentAnimationLengthInSeconds;
 		} else{
@@ -56,18 +60,21 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 	}
 
 	void Spawn(){
-		float ySize = Camera.main.orthographicSize;
-		float xSize = ySize * Camera.main.aspect;
-		float topBuffer = ySize / 2;
-		float bottomBuffer = 4;
-		float sideBuffer = 4;
+		Vector3 randPos = Vector3.zero;
+		do{
+			float ySize = Camera.main.orthographicSize;
+			float xSize = ySize * Camera.main.aspect;
+			float topBuffer = ySize / 2;
+			float bottomBuffer = 4;
+			float sideBuffer = 4;
 
-		xSize -= sideBuffer;
+			xSize -= sideBuffer;
 
-		float xPos = Random.Range(-xSize, xSize);
-		float yPos = Random.Range(-ySize + bottomBuffer, ySize - topBuffer);
+			randPos.x = Random.Range(-xSize, xSize);
+			randPos.y = Random.Range(-ySize + bottomBuffer, ySize - topBuffer);
+		} while(randPos.magnitude < 3.0f);
 
-		transform.position = new Vector3(xPos, yPos, 0);
+		transform.position = randPos;
 
 	}
 
@@ -107,29 +114,29 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 			if(!activating){
 				Debug.Log("Activating");
 				activating = true;
-				// anim.Stop();
-				// anim.ChangeAnimation(activateAnim);
-				// anim.Play();
+
+				// anim.ChangeAnimation(activatingAnim);
 			}
 			getPowerUpTimer += Time.deltaTime;
+			rend.color = Color.Lerp(Color.white, Color.red, Mathf.Clamp01(getPowerUpTimer/getPowerUpTime));
 			if(getPowerUpTimer > getPowerUpTime){
 				getPowerUpTimer = 0f;
 				playerHits = 0;
 				Debug.Log("HEYO WE GOT DAT POWERUP");
 				PlayerGetsPowerUp();
 			}
-		} else if(activating){
+		} 
+		else if(activating){
 			activating = false;
 			Debug.Log("Deactivating");
-			// anim.Stop();
+			rend.color = Color.white;
+
 			// anim.ChangeAnimation(baseAnim);
-			// anim.Play();
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag == "PixelColliders") {
-			Debug.Log("HIT THE POWERUP");
 			playerHits++;
 		}
 	}

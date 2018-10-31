@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114519348497393742}
   - component: {fileID: 82055350002805088}
   - component: {fileID: 114198601734218302}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 212393776092409656}
   - component: {fileID: 95982860249117444}
   - component: {fileID: 114343729836450554}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DogeBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 213715460674284246, guid: a3b62a380aeab4e6e9c7a57d19390092, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

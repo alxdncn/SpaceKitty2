@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1889852289256544}
+  m_IsPrefabParent: 1
+--- !u!1 &1889852289256544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4877443394497244}
+  - component: {fileID: 114607041422521280}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4877443394497244
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889852289256544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114607041422521280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889852289256544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec78c611e8ba341b1a2602d7f1ce0905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabBag:
+  - {fileID: 114695761293808312, guid: 5be1ef8dfcd714b61ac2e087e2e68206, type: 2}
+  enemyTypeNames:
+  - Regular
+  - Snake
+  - Mother
+  enemyTutorialSprites:
+  - {fileID: 21300000, guid: 702c4c9b45d924dad8fb7750d097bd62, type: 3}
+  - {fileID: 21300000, guid: 7c40b7eae6a254548b4120129f529052, type: 3}
+  - {fileID: 21300000, guid: a29d5f936d9324e8a9913284d8fca58d, type: 3}
+  enemyTutorialTexts:
+  - ZAP ON SITE!
+  - A TRICKY DOGE. ZAP THE MIDDLES FIRST.
+  - ONE TOUGH MOTHER. ZAP WHEN ITS SHIELD IS DOWN. AND WATCH FOR ITS PUPS!
+  startSpawnTime: 1.5
+  endSpawnTime: 0.75
+  startBurstTime: 7
+  endBurstTime: 4
+  startBurstNumber: 4
+  endBurstNumber: 7
+  maxY: 24
+  minY: -24
+  maxX: 38
+  minX: -38
+  allEnemiesDead: 0
