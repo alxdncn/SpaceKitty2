@@ -11,6 +11,7 @@ public class Kitty : MonoBehaviour {
 	float coolDownTimer;
 
 	bool hit = false;
+	[HideInInspector] public bool canBeHitByPlayer = true;
 	public int lives = 9;
 
 	SpriteRenderer[] allSprites;
@@ -108,6 +109,7 @@ public class Kitty : MonoBehaviour {
 		if(hit){
 			return;
 		}
+<<<<<<< HEAD
 		// if(col.gameObject.tag == "PixelColliders")
 		// 	return;
 		if(GameStateManager.instance.currentState == GameStateManager.State.Running || 
@@ -120,6 +122,10 @@ public class Kitty : MonoBehaviour {
 				PlayHurtMew ();
 				kittyHit();
 			}
+=======
+		if(col.gameObject.tag == "PixelColliders" && !canBeHitByPlayer)
+			return;
+>>>>>>> c8a39f40210d2527d065d44d6cc66dd5a3ca587d
 
 			if(lives <= 0){
 				lives = 9;

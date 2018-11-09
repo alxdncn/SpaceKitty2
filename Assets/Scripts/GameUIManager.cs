@@ -23,7 +23,7 @@ public class GameUIManager : MonoBehaviour {
 
 	[SerializeField] Text levelText;
 
-	[SerializeField] GameObject gameOverText;
+	[SerializeField] GameObject gameOverPanel;
 	Text tutorialText;
 	Image tutorialImage;
 
@@ -38,7 +38,7 @@ public class GameUIManager : MonoBehaviour {
 		tutorialImage = tutorialObject.transform.GetChild(1).GetComponent<Image>();
 		tutorialObject.SetActive(false);
 		levelText.text = "Level " + DataBetweenScenes.level;
-		gameOverText.SetActive(false);
+		gameOverPanel.SetActive(false);
 	}
 	// Use this for initialization
 	void Start () {
@@ -83,7 +83,15 @@ public class GameUIManager : MonoBehaviour {
 	}
 
 	void ShowGameOver(){
-		gameOverText.SetActive(true);
+		int lastHighScore = PlayerPrefs.GetInt("HighScore", 0); //TODO: Reorganize so this can live on GameStateManager, feels strange here
+		int newScore = GameStateManager.instance.Score;
+		Text endScoreText = gameOverPanel.transform.GetChild(1).GetComponent<Text>(); //This is pretty brittle
+		endScoreText.text = "Score: " + newScore + "\nHigh Score: " + lastHighScore;
+		if(newScore > lastHighScore){
+			PlayerPrefs.SetInt("HighScore", newScore);
+			endScoreText.text = "NEW HIGH SCORE\n" + newScore;
+		}
+		gameOverPanel.SetActive(true);
 	}
 
 	public void SetTutorialText(string newText, Sprite newSprite){

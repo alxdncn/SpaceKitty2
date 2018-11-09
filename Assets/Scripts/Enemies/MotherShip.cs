@@ -114,14 +114,14 @@ public class MotherShip : EnemyBaseClass {
 		pup.gameObject.SetActive (false);
 	}
 
-	public override void DestroyEnemy(){
-		DestroyAllPups();
-		base.DestroyEnemy();
+	public override void DestroyEnemy(bool playerKilled){
+		DestroyAllPups(playerKilled);
+		base.DestroyEnemy(playerKilled);
 	}
 
-	void DestroyAllPups(){
+	void DestroyAllPups(bool playerKilled){
 		for(int i = activePups.Count - 1; i >= 0; i--){
-			activePups[i].DestroyEnemy();
+			activePups[i].DestroyEnemy(playerKilled);
 		}
 	}
 

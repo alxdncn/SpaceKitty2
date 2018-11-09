@@ -32,11 +32,9 @@ public class GameStateManager : MonoBehaviour {
 	public delegate void ScoreChanged();
 	public event ScoreChanged onScoreChanged;
 
-	public delegate void GameEnded();
-	public event GameEnded lostGame;
-
-	public delegate void BeatGame();
-	public event BeatGame beatGame;
+	public delegate void LevelEnd();
+	public event LevelEnd lostGame;
+	public event LevelEnd beatGame;
 
 	[SerializeField] AnimationCurve gameProgressionCurve;
 
@@ -121,6 +119,7 @@ public class GameStateManager : MonoBehaviour {
 		}
 		DataBetweenScenes.kittyLives = 9;
 		restartTime = gameOverTimer;
+
 		if(lostGame != null){
 			lostGame();
 		}

@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 212315995568519614}
   - component: {fileID: 114979742244698670}
   - component: {fileID: 95058103388065874}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DogeBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 61689675006005130}
   - component: {fileID: 50986110290308534}
   - component: {fileID: 82338762826961924}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RegularDoge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

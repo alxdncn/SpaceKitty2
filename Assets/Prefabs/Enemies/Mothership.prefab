@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114748991210093006}
   - component: {fileID: 114754957379770060}
   - component: {fileID: 82359858850189696}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mothership
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4414701097743548}
   - component: {fileID: 212845016135689720}
   - component: {fileID: 114364116075186996}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

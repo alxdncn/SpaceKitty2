@@ -133,12 +133,14 @@ public class PowerUpHandler : MonoBehaviour {
 	[SerializeField] float brightnessChange = 0.05f;
 	[SerializeField] float brightnessCDTime = 2f;
 	float brightnessCDTimer = 0f;
-	bool brightened = false;
+	[HideInInspector] public bool brightened = false;
+	[SerializeField] float colorSineFrequency = 20f;
 
 	void InitBrighten(){
 		if (!brightened) {
 			WebCamShader.Instance.IncreaseBrightness (brightnessChange);
 			coolDowns += BrightenCooldown;
+			Kitty.instance.canBeHitByPlayer = false;
 			brightened = true;
 		}
 
@@ -147,11 +149,17 @@ public class PowerUpHandler : MonoBehaviour {
 
 	void BrightenCooldown(){
 		brightnessCDTimer -= Time.deltaTime;
+		float sine = ((float)Mathf.Sin(brightnessCDTimer * colorSineFrequency) + 1.0f) / 2.0f;
+		Debug.Log(sine);
+		WebCamShader.Instance.renderLightColor.b = sine;
+		Debug.Log(WebCamShader.Instance.renderLightColor);
 
 		if (brightnessCDTimer <= 0) {
 			WebCamShader.Instance.DecreaseBrightness (brightnessChange);
 			coolDowns -= BrightenCooldown;
+			WebCamShader.Instance.renderLightColor = WebCamShader.Instance.startRenderLightColor; //TODO: Make this less brittle
 			brightened = false;
+			Kitty.instance.canBeHitByPlayer = true;
 		}
 	}
 	#endregion
@@ -159,7 +167,7 @@ public class PowerUpHandler : MonoBehaviour {
 	#region DESTROY ALL
 	void DestroyAllEnemies(){
 		if(EnemyManager.Instance != null)
-			EnemyManager.Instance.DestroyAllEnemies ();
+			EnemyManager.Instance.DestroyAllEnemies (true);
 	}
 	#endregion
 
