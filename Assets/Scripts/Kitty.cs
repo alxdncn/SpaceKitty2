@@ -93,7 +93,14 @@ public class Kitty : MonoBehaviour {
 		}
 	}
 
-	void SetStoredLives(){
+	public void GetLife(){
+		lives++;
+		if(kittyHit != null){
+			kittyHit();
+		}
+	}
+
+	void OnDestroy(){
 		DataBetweenScenes.kittyLives = lives;
 	}
 	

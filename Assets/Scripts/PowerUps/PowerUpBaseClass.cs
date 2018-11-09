@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DoodleStudio95;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class PowerUpBaseClass : MonoBehaviour {
@@ -15,8 +16,8 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 	Animator hitFeedbackAnimator;
 
 	float introTimer = 0f;
-	[SerializeField] AnimationClip introAnimation;
 	float introTime = 0;
+	bool playingIntroAnim = true;
 
 	float xSin;
 	float ySin;
@@ -26,11 +27,30 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 		col = GetComponent<Collider2D>();
 		col.enabled = false;
 		hitFeedbackAnimator = GetComponentInChildren<Animator>();
-		Animator anim = GetComponent<Animator>();
-		if(anim != null && introAnimation != null){
-			anim.Play(introAnimation.name);
-			introTime = introAnimation.length;
+		DoodleAnimator anim = GetComponent<DoodleAnimator>();
+		if(anim == null){
+			anim = GetComponentInChildren<DoodleAnimator>();
 		}
+		if(anim != null){
+			introTime =  anim.CurrentAnimationLengthInSeconds;
+		} else{
+			introTime = 0f;
+		}
+		Spawn();
+	}
+
+	public void Reset(){
+		col.enabled = false;
+		DoodleAnimator anim = GetComponent<DoodleAnimator>();
+		if(anim == null){
+			anim = GetComponentInChildren<DoodleAnimator>();
+		}
+		if(anim != null){
+			introTime =  anim.CurrentAnimationLengthInSeconds;
+		} else{
+			introTime = 0f;
+		}
+		playingIntroAnim = true;
 		Spawn();
 	}
 
@@ -52,13 +72,16 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 	}
 
 	void StartObjectAfterAnimation(){
+		Debug.Log("In start animation");
 		introTimer += Time.deltaTime;
 		if(introTimer > introTime){
 			col.enabled = true;
+			playingIntroAnim = false;
 		}
 	}
 
 	protected virtual void Move(){
+
 	}
 
 	protected void PlayerGetsPowerUp(){
@@ -75,16 +98,20 @@ public abstract class PowerUpBaseClass : MonoBehaviour {
 	}
 
 	protected virtual void Update(){
-		StartObjectAfterAnimation();
+		if(playingIntroAnim)
+			StartObjectAfterAnimation();
+		else
+			Move();
+
 		if(playerHits >= minPlayerHits){
 			getPowerUpTimer += Time.deltaTime;
 			if(getPowerUpTimer > getPowerUpTime){
 				getPowerUpTimer = 0f;
 				playerHits = 0;
+				Debug.Log("HEYO WE GOT DAT POWERUP");
 				PlayerGetsPowerUp();
 			}
 		}
-		Move();
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
